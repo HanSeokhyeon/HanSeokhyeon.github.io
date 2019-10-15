@@ -24,7 +24,7 @@ description: >- # this means to ignore newlines until "baseurl:"
   Audio Signal Processing, Deep Learning, TensorFlow, PyTorch, Speech Recognition, Emotion Recognition, Spiking Neural Networks.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://HanSeokhyeon.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: jekyllrb
+# twitter_username: jekyllrb
 github_username:  HanSeokhyeon
 
 # Build settings
