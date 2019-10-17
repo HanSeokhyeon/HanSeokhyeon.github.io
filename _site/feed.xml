@@ -1,40 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-17T15:07:13+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Han Seokhyeon</title><subtitle>Audio Signal Processing, Deep Learning, TensorFlow, PyTorch, Speech Recognition, Emotion Recognition, Spiking Neural Networks.</subtitle><author><name>Han Seokhyeon</name></author><entry><title type="html">터미널에서 git 사용시 자동으로 로그인 하는 방법</title><link href="http://localhost:4000/2019/10/17/github-autologin.html" rel="alternate" type="text/html" title="터미널에서 git 사용시 자동으로 로그인 하는 방법" /><published>2019-10-17T00:00:00+09:00</published><updated>2019-10-17T00:00:00+09:00</updated><id>http://localhost:4000/2019/10/17/github-autologin</id><content type="html" xml:base="http://localhost:4000/2019/10/17/github-autologin.html">&lt;p&gt;코드를 수정후 github에 push할 때마다 로그인하는 것은 매우 귀찮아서 찾아보았다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git config credential.helper store
-$ git push https://github.com/HanSeokhyeon/hanseokhyeon.github.io.git
-Username for 'https://github.com': HanSeokhyeon
-Password for 'https://HanSeokhyeon@github.com': 
-Everything up-to-date
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;출처 : &lt;a href=&quot;https://franzpark.github.io/git-permanent-authentication/&quot;&gt;https://franzpark.github.io/git-permanent-authentication/&lt;/a&gt;&lt;/p&gt;</content><author><name>Han Seokhyeon</name></author><summary type="html">코드를 수정후 github에 push할 때마다 로그인하는 것은 매우 귀찮아서 찾아보았다.</summary></entry><entry><title type="html">포스트에 사진 넣기</title><link href="http://localhost:4000/2019/10/17/image-in-post.html" rel="alternate" type="text/html" title="포스트에 사진 넣기" /><published>2019-10-17T00:00:00+09:00</published><updated>2019-10-17T00:00:00+09:00</updated><id>http://localhost:4000/2019/10/17/image-in-post</id><content type="html" xml:base="http://localhost:4000/2019/10/17/image-in-post.html">&lt;p&gt;New York
-&lt;img src=&quot;http://localhost:4000/assets/images/newyork.jpg&quot; alt=&quot;newyork&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;마크다운 예제는 이러하다&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;New York
-![newyork]({{&quot;/assets/images/newyork.jpg&quot;|absolute_url}})
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Han Seokhyeon</name></author><summary type="html">New York</summary></entry><entry><title type="html">마크다운에 링크 삽입하기</title><link href="http://localhost:4000/2019/10/17/markdown-link.html" rel="alternate" type="text/html" title="마크다운에 링크 삽입하기" /><published>2019-10-17T00:00:00+09:00</published><updated>2019-10-17T00:00:00+09:00</updated><id>http://localhost:4000/2019/10/17/markdown-link</id><content type="html" xml:base="http://localhost:4000/2019/10/17/markdown-link.html">&lt;p&gt;마크다운으로 블로그에 포스팅하다보니 링크를 달아야 할 일이 있어 찾아보았다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;단순-링크-삽입&quot;&gt;단순 링크 삽입&lt;/h1&gt;
-
-&lt;p&gt;구글 : &lt;a href=&quot;http://www.google.com&quot;&gt;http://www.google.com&lt;/a&gt; 와 같은 방식으로 링크를 달고 싶으면&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;http://www.google.com&amp;gt;&lt;/code&gt;
-처럼 &amp;lt;&amp;gt;만 씌어주면 된다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;인라인-주소-삽입&quot;&gt;인라인 주소 삽입&lt;/h1&gt;
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Google](http://www.google.co.kr)&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.google.co.kr&quot;&gt;Google&lt;/a&gt;로 표시&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;출처: &lt;a href=&quot;https://opentutorials.org/module/782/6083&quot;&gt;https://opentutorials.org/module/782/6083&lt;/a&gt;&lt;/p&gt;</content><author><name>Han Seokhyeon</name></author><summary type="html">마크다운으로 블로그에 포스팅하다보니 링크를 달아야 할 일이 있어 찾아보았다.</summary></entry><entry><title type="html">파이썬 pow 함수</title><link href="http://localhost:4000/2019/10/17/pow-function.html" rel="alternate" type="text/html" title="파이썬 pow 함수" /><published>2019-10-17T00:00:00+09:00</published><updated>2019-10-17T00:00:00+09:00</updated><id>http://localhost:4000/2019/10/17/pow-function</id><content type="html" xml:base="http://localhost:4000/2019/10/17/pow-function.html">&lt;p&gt;알고리즘 문제를 풀던중 pow(x, y, z)와 같이 3번째 인자를 사용한 경우가 나와서 찾아보게 되었다.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-17T18:49:30+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Han Seokhyeon</title><subtitle>Audio Signal Processing, Deep Learning, TensorFlow, PyTorch, Speech Recognition, Emotion Recognition, Spiking Neural Networks.</subtitle><author><name>Han Seokhyeon</name></author><entry><title type="html">파이썬 pow 함수</title><link href="http://localhost:4000/2019/10/17/pow-function.html" rel="alternate" type="text/html" title="파이썬 pow 함수" /><published>2019-10-17T00:00:00+09:00</published><updated>2019-10-17T00:00:00+09:00</updated><id>http://localhost:4000/2019/10/17/pow-function</id><content type="html" xml:base="http://localhost:4000/2019/10/17/pow-function.html">&lt;p&gt;알고리즘 문제를 풀던중 pow(x, y, z)와 같이 3번째 인자를 사용한 경우가 나와서 찾아보게 되었다.&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; pow(2, 4, 3)
 1
@@ -54,7 +18,161 @@ Everything up-to-date
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;출처: &lt;a href=&quot;https://m.blog.naver.com/PostView.nhn?blogId=wideeyed&amp;amp;logNo=221137999832&amp;amp;proxyReferer=https%3A%2F%2Fwww.google.com%2F&quot;&gt;https://m.blog.naver.com/PostView.nhn?blogId=wideeyed&amp;amp;logNo=221137999832&amp;amp;proxyReferer=https%3A%2F%2Fwww.google.com%2F&lt;/a&gt;&lt;/p&gt;</content><author><name>Han Seokhyeon</name></author><summary type="html">알고리즘 문제를 풀던중 pow(x, y, z)와 같이 3번째 인자를 사용한 경우가 나와서 찾아보게 되었다.</summary></entry><entry><title type="html">2차원 배열에서 본인을 제외한 min 구하기</title><link href="http://localhost:4000/2019/10/15/2d-array-min-except-me.html" rel="alternate" type="text/html" title="2차원 배열에서 본인을 제외한 min 구하기" /><published>2019-10-15T00:00:00+09:00</published><updated>2019-10-15T00:00:00+09:00</updated><id>http://localhost:4000/2019/10/15/2d-array-min-except-me</id><content type="html" xml:base="http://localhost:4000/2019/10/15/2d-array-min-except-me.html">&lt;p&gt;질문이 들어와서 고민하다가 내가 생각한 방법을 남긴다.&lt;/p&gt;
+&lt;p&gt;출처: &lt;a href=&quot;https://m.blog.naver.com/PostView.nhn?blogId=wideeyed&amp;amp;logNo=221137999832&amp;amp;proxyReferer=https%3A%2F%2Fwww.google.com%2F&quot;&gt;https://m.blog.naver.com/PostView.nhn?blogId=wideeyed&amp;amp;logNo=221137999832&amp;amp;proxyReferer=https%3A%2F%2Fwww.google.com%2F&lt;/a&gt;&lt;/p&gt;</content><author><name>Han Seokhyeon</name></author><summary type="html">알고리즘 문제를 풀던중 pow(x, y, z)와 같이 3번째 인자를 사용한 경우가 나와서 찾아보게 되었다.</summary></entry><entry><title type="html">마크다운에 링크 삽입하기</title><link href="http://localhost:4000/2019/10/17/markdown-link.html" rel="alternate" type="text/html" title="마크다운에 링크 삽입하기" /><published>2019-10-17T00:00:00+09:00</published><updated>2019-10-17T00:00:00+09:00</updated><id>http://localhost:4000/2019/10/17/markdown-link</id><content type="html" xml:base="http://localhost:4000/2019/10/17/markdown-link.html">&lt;p&gt;마크다운으로 블로그에 포스팅하다보니 링크를 달아야 할 일이 있어 찾아보았다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;단순-링크-삽입&quot;&gt;단순 링크 삽입&lt;/h1&gt;
+
+&lt;p&gt;구글 : &lt;a href=&quot;http://www.google.com&quot;&gt;http://www.google.com&lt;/a&gt; 와 같은 방식으로 링크를 달고 싶으면&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;http://www.google.com&amp;gt;&lt;/code&gt;
+처럼 &amp;lt;&amp;gt;만 씌어주면 된다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;인라인-주소-삽입&quot;&gt;인라인 주소 삽입&lt;/h1&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Google](http://www.google.co.kr)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.google.co.kr&quot;&gt;Google&lt;/a&gt;로 표시&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;출처: &lt;a href=&quot;https://opentutorials.org/module/782/6083&quot;&gt;https://opentutorials.org/module/782/6083&lt;/a&gt;&lt;/p&gt;</content><author><name>Han Seokhyeon</name></author><summary type="html">마크다운으로 블로그에 포스팅하다보니 링크를 달아야 할 일이 있어 찾아보았다.</summary></entry><entry><title type="html">포스트에 사진 넣기</title><link href="http://localhost:4000/2019/10/17/image-in-post.html" rel="alternate" type="text/html" title="포스트에 사진 넣기" /><published>2019-10-17T00:00:00+09:00</published><updated>2019-10-17T00:00:00+09:00</updated><id>http://localhost:4000/2019/10/17/image-in-post</id><content type="html" xml:base="http://localhost:4000/2019/10/17/image-in-post.html">&lt;p&gt;New York
+&lt;img src=&quot;http://localhost:4000/assets/images/newyork.jpg&quot; alt=&quot;newyork&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;마크다운 예제는 이러하다&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;New York
+![newyork]({{&quot;/assets/images/newyork.jpg&quot;|absolute_url}})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Han Seokhyeon</name></author><summary type="html">New York</summary></entry><entry><title type="html">ANC 논문 정리</title><link href="http://localhost:4000/2019/10/17/anc-article.html" rel="alternate" type="text/html" title="ANC 논문 정리" /><published>2019-10-17T00:00:00+09:00</published><updated>2019-10-17T00:00:00+09:00</updated><id>http://localhost:4000/2019/10/17/anc-article</id><content type="html" xml:base="http://localhost:4000/2019/10/17/anc-article.html">&lt;p&gt;프로젝트하면서 유명한 ANC 논문들의 실험 스펙을 정리할 필요가 있어 포스팅하게 되었다.&lt;/p&gt;
+
+&lt;h1 id=&quot;a-robust-hybrid-feedback-active-noise-cancellation-headset&quot;&gt;A Robust Hybrid Feedback Active Noise Cancellation Headset&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://core.ac.uk/download/pdf/83936972.pdf&quot;&gt;논문 링크&lt;/a&gt;&lt;br /&gt;
+Y Song 저술 - 2005 - 99회 인용&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Active noise cancellation (ANC), feedback control, filtered-x least-mean-square (FXLMS), headset&lt;/li&gt;
+  &lt;li&gt;Sampling rate of sound card : 8 kHz&lt;/li&gt;
+  &lt;li&gt;Sampling rate : 2 kHz&lt;/li&gt;
+  &lt;li&gt;Filter tab : 64&lt;/li&gt;
+  &lt;li&gt;Test data : a 230 Hz tone embedded in wideband noise&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;구조&quot;&gt;구조&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/article1/fig6.png&quot; alt=&quot;fig6&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;특징&quot;&gt;특징&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Analog와 digital ANC를 동시에 사용해 hybrid ANC를 구현했다.&lt;/li&gt;
+  &lt;li&gt;H(s)는 second-order highpass filter&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;실험결과&quot;&gt;실험결과&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/article1/fig10.png&quot; alt=&quot;fig10&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;100~600 Hz까지 ANC를 해서 그래프를 600 Hz까지만 그렸다.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;The sampling rate is 2 kHz, and the cutoff
+frequency of the anti-aliasing and reconstruction lowpass filters
+is 600 Hz. The working frequency of this prototype is from
+100 Hz to 600 Hz, and the headset shells that cover the ears can
+effectively attenuate noise higher than 600 Hz.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;active-noise-control-system-for-headphone-applications&quot;&gt;Active Noise Control System for Headphone Applications&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;amp;arnumber=1597204&quot;&gt;논문 링크&lt;/a&gt;&lt;br /&gt;
+SM Kuo 저술 - 2006 - 150회 인용&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Active noise control (ANC), adaptive feedback ANC systems, ANC headphones, error sensor optimization, secondary path modeling&lt;/li&gt;
+  &lt;li&gt;Sampling rate : 8 kHz&lt;/li&gt;
+  &lt;li&gt;Filter tab
+    &lt;ul&gt;
+      &lt;li&gt;secondary path filter : 65&lt;/li&gt;
+      &lt;li&gt;ANC filter : 110&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Step size
+    &lt;ul&gt;
+      &lt;li&gt;secondary path filter : 0.05&lt;/li&gt;
+      &lt;li&gt;ANC filter : 0.3&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Test data
+    &lt;ul&gt;
+      &lt;li&gt;0 ~ 2 kHz까지 100 Hz씩 상승하는 sinusoidal noises&lt;/li&gt;
+      &lt;li&gt;engine noise
+        &lt;ul&gt;
+          &lt;li&gt;2200 rpm&lt;/li&gt;
+          &lt;li&gt;3700 rpm&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;구조-1&quot;&gt;구조&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/article2/fig1.png&quot; alt=&quot;fig1&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;특징-1&quot;&gt;특징&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;헤드폰 착용 구조에 대한 실험을 하였다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;실험-결과&quot;&gt;실험 결과&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/article2/fig7.png&quot; alt=&quot;fig7&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;당연히 저주파가 잘된다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/article2/fig9.png&quot; alt=&quot;fig9&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;2200 rpm에 대해 적당히 잘된다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/article2/fig8.png&quot; alt=&quot;fig8&quot; /&gt;
+&lt;img src=&quot;/assets/images/article2/fig10.png&quot; alt=&quot;fig10&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Bose꺼랑 비교해놨는데 사실 누가 더 좋은지 모르겠다. y축 스케일이 안맞는데 불편하다. 그리고 800 Hz까지밖에 안그렸는데 그 이상은 무의미한 것 같다.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;결론&quot;&gt;결론&lt;/h1&gt;
+&lt;p&gt;현재 나의 실험 상태와 크게 다르지 않은 것 같다. 나는 현재 10가지의 노이즈 데이터를 가지고 실험중인데 위 논문들은 데이터가 너무 부족하다. 그래도 filter tab 길이나 등등 정보를 얻을 수 있었다.&lt;/p&gt;</content><author><name>Han Seokhyeon</name></author><summary type="html">프로젝트하면서 유명한 ANC 논문들의 실험 스펙을 정리할 필요가 있어 포스팅하게 되었다.</summary></entry><entry><title type="html">터미널에서 git 사용시 자동으로 로그인 하는 방법</title><link href="http://localhost:4000/2019/10/17/github-autologin.html" rel="alternate" type="text/html" title="터미널에서 git 사용시 자동으로 로그인 하는 방법" /><published>2019-10-17T00:00:00+09:00</published><updated>2019-10-17T00:00:00+09:00</updated><id>http://localhost:4000/2019/10/17/github-autologin</id><content type="html" xml:base="http://localhost:4000/2019/10/17/github-autologin.html">&lt;p&gt;코드를 수정후 github에 push할 때마다 로그인하는 것은 매우 귀찮아서 찾아보았다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git config credential.helper store
+$ git push https://github.com/HanSeokhyeon/hanseokhyeon.github.io.git
+Username for 'https://github.com': HanSeokhyeon
+Password for 'https://HanSeokhyeon@github.com': 
+Everything up-to-date
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;출처 : &lt;a href=&quot;https://franzpark.github.io/git-permanent-authentication/&quot;&gt;https://franzpark.github.io/git-permanent-authentication/&lt;/a&gt;&lt;/p&gt;</content><author><name>Han Seokhyeon</name></author><summary type="html">코드를 수정후 github에 push할 때마다 로그인하는 것은 매우 귀찮아서 찾아보았다.</summary></entry><entry><title type="html">2차원 배열에서 본인을 제외한 min 구하기</title><link href="http://localhost:4000/2019/10/15/2d-array-min-except-me.html" rel="alternate" type="text/html" title="2차원 배열에서 본인을 제외한 min 구하기" /><published>2019-10-15T00:00:00+09:00</published><updated>2019-10-15T00:00:00+09:00</updated><id>http://localhost:4000/2019/10/15/2d-array-min-except-me</id><content type="html" xml:base="http://localhost:4000/2019/10/15/2d-array-min-except-me.html">&lt;p&gt;질문이 들어와서 고민하다가 내가 생각한 방법을 남긴다.&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;arr[i, j] = inf
 min_value = np.min(arr)
