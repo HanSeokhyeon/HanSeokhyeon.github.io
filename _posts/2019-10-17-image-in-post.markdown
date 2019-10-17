@@ -4,11 +4,11 @@ title: 포스트에 사진 넣기
 ---
 
 New York
-! [new york] ({{ "/assets/image/newyork.jpg" | absolute_url }})
+![newyork]({{ "/assets/image/newyork.jpg" | absolute_url }})
 
 마크다운 예제는 이러하다
 
 ```
 New York
-! [new york] ({{ "/assets/image/newyork.jpg" | absolute_url }})
+![newyork]({{ "/assets/image/newyork.jpg" | absolute_url }})
 ```
