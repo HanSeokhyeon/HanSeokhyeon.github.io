@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-17T14:51:23+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Han Seokhyeon</title><subtitle>Audio Signal Processing, Deep Learning, TensorFlow, PyTorch, Speech Recognition, Emotion Recognition, Spiking Neural Networks.</subtitle><author><name>Han Seokhyeon</name></author><entry><title type="html">터미널에서 git 사용시 자동으로 로그인 하는 방법</title><link href="http://localhost:4000/2019/10/17/github-autologin.html" rel="alternate" type="text/html" title="터미널에서 git 사용시 자동으로 로그인 하는 방법" /><published>2019-10-17T00:00:00+09:00</published><updated>2019-10-17T00:00:00+09:00</updated><id>http://localhost:4000/2019/10/17/github-autologin</id><content type="html" xml:base="http://localhost:4000/2019/10/17/github-autologin.html">&lt;p&gt;코드를 수정후 github에 push할 때마다 로그인하는 것은 매우 귀찮아서 찾아보았다.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-17T15:07:13+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Han Seokhyeon</title><subtitle>Audio Signal Processing, Deep Learning, TensorFlow, PyTorch, Speech Recognition, Emotion Recognition, Spiking Neural Networks.</subtitle><author><name>Han Seokhyeon</name></author><entry><title type="html">터미널에서 git 사용시 자동으로 로그인 하는 방법</title><link href="http://localhost:4000/2019/10/17/github-autologin.html" rel="alternate" type="text/html" title="터미널에서 git 사용시 자동으로 로그인 하는 방법" /><published>2019-10-17T00:00:00+09:00</published><updated>2019-10-17T00:00:00+09:00</updated><id>http://localhost:4000/2019/10/17/github-autologin</id><content type="html" xml:base="http://localhost:4000/2019/10/17/github-autologin.html">&lt;p&gt;코드를 수정후 github에 push할 때마다 로그인하는 것은 매우 귀찮아서 찾아보았다.&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git config credential.helper store
 $ git push https://github.com/HanSeokhyeon/hanseokhyeon.github.io.git
@@ -14,7 +14,27 @@ Everything up-to-date
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;New York
 ![newyork]({{&quot;/assets/images/newyork.jpg&quot;|absolute_url}})
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Han Seokhyeon</name></author><summary type="html">New York</summary></entry><entry><title type="html">파이썬 pow 함수</title><link href="http://localhost:4000/2019/10/17/pow-function.html" rel="alternate" type="text/html" title="파이썬 pow 함수" /><published>2019-10-17T00:00:00+09:00</published><updated>2019-10-17T00:00:00+09:00</updated><id>http://localhost:4000/2019/10/17/pow-function</id><content type="html" xml:base="http://localhost:4000/2019/10/17/pow-function.html">&lt;p&gt;알고리즘 문제를 풀던중 pow(x, y, z)와 같이 3번째 인자를 사용한 경우가 나와서 찾아보게 되었다.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Han Seokhyeon</name></author><summary type="html">New York</summary></entry><entry><title type="html">마크다운에 링크 삽입하기</title><link href="http://localhost:4000/2019/10/17/markdown-link.html" rel="alternate" type="text/html" title="마크다운에 링크 삽입하기" /><published>2019-10-17T00:00:00+09:00</published><updated>2019-10-17T00:00:00+09:00</updated><id>http://localhost:4000/2019/10/17/markdown-link</id><content type="html" xml:base="http://localhost:4000/2019/10/17/markdown-link.html">&lt;p&gt;마크다운으로 블로그에 포스팅하다보니 링크를 달아야 할 일이 있어 찾아보았다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;단순-링크-삽입&quot;&gt;단순 링크 삽입&lt;/h1&gt;
+
+&lt;p&gt;구글 : &lt;a href=&quot;http://www.google.com&quot;&gt;http://www.google.com&lt;/a&gt; 와 같은 방식으로 링크를 달고 싶으면&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;http://www.google.com&amp;gt;&lt;/code&gt;
+처럼 &amp;lt;&amp;gt;만 씌어주면 된다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;인라인-주소-삽입&quot;&gt;인라인 주소 삽입&lt;/h1&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Google](http://www.google.co.kr)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.google.co.kr&quot;&gt;Google&lt;/a&gt;로 표시&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;출처: &lt;a href=&quot;https://opentutorials.org/module/782/6083&quot;&gt;https://opentutorials.org/module/782/6083&lt;/a&gt;&lt;/p&gt;</content><author><name>Han Seokhyeon</name></author><summary type="html">마크다운으로 블로그에 포스팅하다보니 링크를 달아야 할 일이 있어 찾아보았다.</summary></entry><entry><title type="html">파이썬 pow 함수</title><link href="http://localhost:4000/2019/10/17/pow-function.html" rel="alternate" type="text/html" title="파이썬 pow 함수" /><published>2019-10-17T00:00:00+09:00</published><updated>2019-10-17T00:00:00+09:00</updated><id>http://localhost:4000/2019/10/17/pow-function</id><content type="html" xml:base="http://localhost:4000/2019/10/17/pow-function.html">&lt;p&gt;알고리즘 문제를 풀던중 pow(x, y, z)와 같이 3번째 인자를 사용한 경우가 나와서 찾아보게 되었다.&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; pow(2, 4, 3)
 1
