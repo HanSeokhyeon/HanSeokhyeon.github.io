@@ -1,4 +1,75 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-17T18:49:30+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Han Seokhyeon</title><subtitle>Audio Signal Processing, Deep Learning, TensorFlow, PyTorch, Speech Recognition, Emotion Recognition, Spiking Neural Networks.</subtitle><author><name>Han Seokhyeon</name></author><entry><title type="html">파이썬 pow 함수</title><link href="http://localhost:4000/2019/10/17/pow-function.html" rel="alternate" type="text/html" title="파이썬 pow 함수" /><published>2019-10-17T00:00:00+09:00</published><updated>2019-10-17T00:00:00+09:00</updated><id>http://localhost:4000/2019/10/17/pow-function</id><content type="html" xml:base="http://localhost:4000/2019/10/17/pow-function.html">&lt;p&gt;알고리즘 문제를 풀던중 pow(x, y, z)와 같이 3번째 인자를 사용한 경우가 나와서 찾아보게 되었다.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-18T18:57:42+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Han Seokhyeon</title><subtitle>Audio Signal Processing, Deep Learning, TensorFlow, PyTorch, Speech Recognition, Emotion Recognition, Spiking Neural Networks.</subtitle><author><name>Han Seokhyeon</name></author><entry><title type="html">파이썬에서 librosa 패키지로 스펙트럼 그리기</title><link href="http://localhost:4000/2019/10/18/plot-spectrum.html" rel="alternate" type="text/html" title="파이썬에서 librosa 패키지로 스펙트럼 그리기" /><published>2019-10-18T00:00:00+09:00</published><updated>2019-10-18T00:00:00+09:00</updated><id>http://localhost:4000/2019/10/18/plot-spectrum</id><content type="html" xml:base="http://localhost:4000/2019/10/18/plot-spectrum.html">&lt;p&gt;프로젝트에서 파형의 스펙트럼을 그려서 분석할 일이 있어 코드를 작성해보았다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;data-load-normalization&quot;&gt;data load, normalization&lt;/h3&gt;
+
+&lt;p&gt;내가 사용한 파일이 raw 파일이라 아래와 같은 방식으로 데이터를 읽었다. 
+librosa 패키지는 함수의 입력으로 -1 ~ 1로 노말라이즈된 데이터를 사용하기 때문에 32767로 나누어주었다.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-angular2&quot;&gt;data = np.fromfile(&quot;ANC_X_8k/boeing_FF.raw&quot;, dtype=np.int16)
+data = data.astype(np.float) / 32767
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;spectrogram-amplitude-db&quot;&gt;spectrogram, amplitude, dB&lt;/h3&gt;
+
+&lt;p&gt;librosa.stft()는 data의 스펙트로그램을 리턴한다. 
+여기서 n_fft로 FFT 사이즈를 설정할 수 있다.
+스펙트로그램은 복소수로 리턴되므로 np.abs를 이용해서 amplitude로 바꿔준다. 
+librosa.amplitude_to_db()를 이용해 스펙트로그램을 dB 스케일로 바꿔준다.
+원칙상으론 데이터의 길이만큼 fft를 하면 됐으나 편의상 스펙트로그램의 평균으로 대체하였다.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-angular2&quot;&gt;data = librosa.stft(data[sample_rate // 4:sample_rate // 4 * 2], n_fft=n_fft)
+data = np.mean(librosa.amplitude_to_db(np.abs(data)), axis=1)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;다음은 pyplot을 이용해 plot하는 과정이므로 전체 코드를 참고하면 된다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;전체-코드&quot;&gt;전체 코드&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-angular2&quot;&gt;import numpy as np
+import librosa
+import matplotlib.pyplot as plt
+
+
+sample_rate = 8000
+n_fft = 512
+
+data = np.fromfile(&quot;ANC_X_8k/boeing_FF.raw&quot;, dtype=np.int16)
+data = data.astype(np.float) / 32767
+data = librosa.stft(data[sample_rate // 4:sample_rate // 4 * 2], n_fft=n_fft)
+data = np.mean(librosa.amplitude_to_db(np.abs(data)), axis=1)
+
+plt.title('boeing')
+
+plt.xlabel(&quot;Frequency[Hz]&quot;)
+plt.xticks(range(0, n_fft//2+1, 32), np.arange(0, 4001, 500))
+plt.xlim(0, n_fft//2)
+
+plt.ylabel(&quot;Amplitude[dB]&quot;)
+
+plt.plot(data, label='data', alpha=0.7)
+
+plt.grid()
+plt.legend()
+
+fig = plt.gcf()
+
+plt.show()
+fig.savefig('boeing.png')
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;결과물&quot;&gt;결과물&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/boeing.png&quot; alt=&quot;boeing&quot; /&gt;&lt;/p&gt;</content><author><name>Han Seokhyeon</name></author><summary type="html">프로젝트에서 파형의 스펙트럼을 그려서 분석할 일이 있어 코드를 작성해보았다.</summary></entry><entry><title type="html">파이썬 pow 함수</title><link href="http://localhost:4000/2019/10/17/pow-function.html" rel="alternate" type="text/html" title="파이썬 pow 함수" /><published>2019-10-17T00:00:00+09:00</published><updated>2019-10-17T00:00:00+09:00</updated><id>http://localhost:4000/2019/10/17/pow-function</id><content type="html" xml:base="http://localhost:4000/2019/10/17/pow-function.html">&lt;p&gt;알고리즘 문제를 풀던중 pow(x, y, z)와 같이 3번째 인자를 사용한 경우가 나와서 찾아보게 되었다.&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; pow(2, 4, 3)
 1
@@ -38,14 +109,7 @@
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;출처: &lt;a href=&quot;https://opentutorials.org/module/782/6083&quot;&gt;https://opentutorials.org/module/782/6083&lt;/a&gt;&lt;/p&gt;</content><author><name>Han Seokhyeon</name></author><summary type="html">마크다운으로 블로그에 포스팅하다보니 링크를 달아야 할 일이 있어 찾아보았다.</summary></entry><entry><title type="html">포스트에 사진 넣기</title><link href="http://localhost:4000/2019/10/17/image-in-post.html" rel="alternate" type="text/html" title="포스트에 사진 넣기" /><published>2019-10-17T00:00:00+09:00</published><updated>2019-10-17T00:00:00+09:00</updated><id>http://localhost:4000/2019/10/17/image-in-post</id><content type="html" xml:base="http://localhost:4000/2019/10/17/image-in-post.html">&lt;p&gt;New York
-&lt;img src=&quot;http://localhost:4000/assets/images/newyork.jpg&quot; alt=&quot;newyork&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;마크다운 예제는 이러하다&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;New York
-![newyork]({{&quot;/assets/images/newyork.jpg&quot;|absolute_url}})
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Han Seokhyeon</name></author><summary type="html">New York</summary></entry><entry><title type="html">ANC 논문 정리</title><link href="http://localhost:4000/2019/10/17/anc-article.html" rel="alternate" type="text/html" title="ANC 논문 정리" /><published>2019-10-17T00:00:00+09:00</published><updated>2019-10-17T00:00:00+09:00</updated><id>http://localhost:4000/2019/10/17/anc-article</id><content type="html" xml:base="http://localhost:4000/2019/10/17/anc-article.html">&lt;p&gt;프로젝트하면서 유명한 ANC 논문들의 실험 스펙을 정리할 필요가 있어 포스팅하게 되었다.&lt;/p&gt;
+&lt;p&gt;출처: &lt;a href=&quot;https://opentutorials.org/module/782/6083&quot;&gt;https://opentutorials.org/module/782/6083&lt;/a&gt;&lt;/p&gt;</content><author><name>Han Seokhyeon</name></author><summary type="html">마크다운으로 블로그에 포스팅하다보니 링크를 달아야 할 일이 있어 찾아보았다.</summary></entry><entry><title type="html">ANC 논문 정리</title><link href="http://localhost:4000/2019/10/17/anc-article.html" rel="alternate" type="text/html" title="ANC 논문 정리" /><published>2019-10-17T00:00:00+09:00</published><updated>2019-10-17T00:00:00+09:00</updated><id>http://localhost:4000/2019/10/17/anc-article</id><content type="html" xml:base="http://localhost:4000/2019/10/17/anc-article.html">&lt;p&gt;프로젝트하면서 유명한 ANC 논문들의 실험 스펙을 정리할 필요가 있어 포스팅하게 되었다.&lt;/p&gt;
 
 &lt;h1 id=&quot;a-robust-hybrid-feedback-active-noise-cancellation-headset&quot;&gt;A Robust Hybrid Feedback Active Noise Cancellation Headset&lt;/h1&gt;
 
@@ -157,6 +221,8 @@ SM Kuo 저술 - 2006 - 150회 인용&lt;/p&gt;
 
 &lt;p&gt;Bose꺼랑 비교해놨는데 사실 누가 더 좋은지 모르겠다. y축 스케일이 안맞는데 불편하다. 그리고 800 Hz까지밖에 안그렸는데 그 이상은 무의미한 것 같다.&lt;/p&gt;
 
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
 &lt;hr /&gt;
 &lt;hr /&gt;
 
@@ -172,7 +238,14 @@ Password for 'https://HanSeokhyeon@github.com':
 Everything up-to-date
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;출처 : &lt;a href=&quot;https://franzpark.github.io/git-permanent-authentication/&quot;&gt;https://franzpark.github.io/git-permanent-authentication/&lt;/a&gt;&lt;/p&gt;</content><author><name>Han Seokhyeon</name></author><summary type="html">코드를 수정후 github에 push할 때마다 로그인하는 것은 매우 귀찮아서 찾아보았다.</summary></entry><entry><title type="html">2차원 배열에서 본인을 제외한 min 구하기</title><link href="http://localhost:4000/2019/10/15/2d-array-min-except-me.html" rel="alternate" type="text/html" title="2차원 배열에서 본인을 제외한 min 구하기" /><published>2019-10-15T00:00:00+09:00</published><updated>2019-10-15T00:00:00+09:00</updated><id>http://localhost:4000/2019/10/15/2d-array-min-except-me</id><content type="html" xml:base="http://localhost:4000/2019/10/15/2d-array-min-except-me.html">&lt;p&gt;질문이 들어와서 고민하다가 내가 생각한 방법을 남긴다.&lt;/p&gt;
+&lt;p&gt;출처 : &lt;a href=&quot;https://franzpark.github.io/git-permanent-authentication/&quot;&gt;https://franzpark.github.io/git-permanent-authentication/&lt;/a&gt;&lt;/p&gt;</content><author><name>Han Seokhyeon</name></author><summary type="html">코드를 수정후 github에 push할 때마다 로그인하는 것은 매우 귀찮아서 찾아보았다.</summary></entry><entry><title type="html">포스트에 사진 넣기</title><link href="http://localhost:4000/2019/10/17/image-in-post.html" rel="alternate" type="text/html" title="포스트에 사진 넣기" /><published>2019-10-17T00:00:00+09:00</published><updated>2019-10-17T00:00:00+09:00</updated><id>http://localhost:4000/2019/10/17/image-in-post</id><content type="html" xml:base="http://localhost:4000/2019/10/17/image-in-post.html">&lt;p&gt;New York
+&lt;img src=&quot;http://localhost:4000/assets/images/newyork.jpg&quot; alt=&quot;newyork&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;마크다운 예제는 이러하다&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;New York
+![newyork]({{&quot;/assets/images/newyork.jpg&quot;|absolute_url}})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Han Seokhyeon</name></author><summary type="html">New York</summary></entry><entry><title type="html">2차원 배열에서 본인을 제외한 min 구하기</title><link href="http://localhost:4000/2019/10/15/2d-array-min-except-me.html" rel="alternate" type="text/html" title="2차원 배열에서 본인을 제외한 min 구하기" /><published>2019-10-15T00:00:00+09:00</published><updated>2019-10-15T00:00:00+09:00</updated><id>http://localhost:4000/2019/10/15/2d-array-min-except-me</id><content type="html" xml:base="http://localhost:4000/2019/10/15/2d-array-min-except-me.html">&lt;p&gt;질문이 들어와서 고민하다가 내가 생각한 방법을 남긴다.&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;arr[i, j] = inf
 min_value = np.min(arr)
