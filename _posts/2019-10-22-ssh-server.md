@@ -119,7 +119,7 @@ han@han-desktop:~$
 public key?라 해서 파일형태로 key를 가지고 접속하는 방법도 있다.
 
 
-
+---
 출처:  
 <https://jimnong.tistory.com/713>  
 <https://cupjoo.tistory.com/98>  
