@@ -209,6 +209,53 @@ Epoch 5/5
 
 잘된다.
 
+# 6. Docker container commit하기
+기껏 jupyter notebook 다 설치했는데 날릴 수 없다. 그러므로 docker 종료 전에 이미지에 commit해서 변경사항을 등록해줘야한다. 
+
+```
+docker images
+```
+를 입력해 이미지를 확인하면  
+output:
+```
+REPOSITORY              TAG                 IMAGE ID            CREATED             SIZE
+tensorflow/tensorflow   latest              d64a95598d6c        2 weeks ago         1.03GB
+```
+와 같은 식으로 이미지의 내용이 출력된다. commit을 하기 위해서는 container의 ID가 필요하다. 아래의 명령어를 사용하면 알 수 있다.
+
+```
+docker ps -a
+```
+output:
+```
+CONTAINER ID        IMAGE                   COMMAND             CREATED             STATUS                    PORTS                    NAMES
+ae73f71e625d        tensorflow/tensorflow   "/bin/bash"         About an hour ago   Up About an hour          0.0.0.0:8888->8888/tcp   pensive_buck
+f585a03cd7ae        tensorflow/tensorflow   "/bin/bash"         19 hours ago        Exited (0) 19 hours ago                            wizardly_haslett
+```
+복잡해 보이지만 첫번재 있는게 container ID다. 복사한후
+
+```
+docker commit ae73f71e625d tensorflow/tensorflow
+```
+output:
+```
+sha256:b47a8c553c49e9f8db060811feba1ad69725390580f1112a37d68927d7b2938c
+```
+라는 결과를 볼 수 있다.
+
+다시
+```
+docker images
+```
+를 입력하면  
+output:
+```
+REPOSITORY              TAG                 IMAGE ID            CREATED             SIZE
+tensorflow/tensorflow   latest              b47a8c553c49        8 seconds ago       1.15GB
+tensorflow/tensorflow   <none>              d64a95598d6c        2 weeks ago         1.03GB
+```
+를 얻을 수 있고, 8초전에 하나 추가되었다. SIZE가 증가한거 보니 제대로 된거 같다. 귀찮아서 테스트 안해본건 아니다.
+
 ---
 출처:  
 <http://moducon.kr/2018/wp-content/uploads/sites/2/2018/12/leesangsoo_slide.pdf>  
