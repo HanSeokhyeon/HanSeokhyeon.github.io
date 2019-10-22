@@ -164,7 +164,6 @@ han@han-desktop:~$
 하지만 단순하게 프로그램을 돌릴 계획인데 root 권한은 필요 없을 뿐더러 보안에 악영향을 끼칠 수 있으므로 금지시키는 것도 좋다.
 public key?라 해서 파일형태로 key를 가지고 접속하는 방법도 있다.
 
-
 ---
 출처:  
 <https://jimnong.tistory.com/713>  
