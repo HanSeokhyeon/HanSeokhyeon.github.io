@@ -1,4 +1,458 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-18T18:57:42+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Han Seokhyeon</title><subtitle>Audio Signal Processing, Deep Learning, TensorFlow, PyTorch, Speech Recognition, Emotion Recognition, Spiking Neural Networks.</subtitle><author><name>Han Seokhyeon</name></author><entry><title type="html">파이썬에서 librosa 패키지로 스펙트럼 그리기</title><link href="http://localhost:4000/2019/10/18/plot-spectrum.html" rel="alternate" type="text/html" title="파이썬에서 librosa 패키지로 스펙트럼 그리기" /><published>2019-10-18T00:00:00+09:00</published><updated>2019-10-18T00:00:00+09:00</updated><id>http://localhost:4000/2019/10/18/plot-spectrum</id><content type="html" xml:base="http://localhost:4000/2019/10/18/plot-spectrum.html">&lt;p&gt;프로젝트에서 파형의 스펙트럼을 그려서 분석할 일이 있어 코드를 작성해보았다.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-23T18:47:39+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Han Seokhyeon</title><subtitle>A blog about technology and stuff related</subtitle><entry><title type="html">tmux 사용법</title><link href="http://localhost:4000/tmux-tutorial/" rel="alternate" type="text/html" title="tmux 사용법" /><published>2019-10-22T04:30:17+09:00</published><updated>2019-10-22T04:30:17+09:00</updated><id>http://localhost:4000/tmux-tutorial</id><content type="html" xml:base="http://localhost:4000/tmux-tutorial/">&lt;p&gt;ssh server를 이용할 때 로컬에서 터미널을 끄면 서버와의 연결이 끊기며 서버에 프로그램이 종료되는 것이 불편하다. 
+하지만 tmux를 이용하면 터미널을 꺼도 연결이 끊어지지 않으며 프로그램이 서버에서 계속 작동한다. 
+그래서 tmux를 사용하고 사용법을 알아보고자 한다.&lt;/p&gt;
+
+&lt;h1 id=&quot;1-설치&quot;&gt;1. 설치&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt install tmux
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;매우 간단.&lt;/p&gt;
+
+&lt;h1 id=&quot;2-실행&quot;&gt;2. 실행&lt;/h1&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;tmux
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;매우 간단.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/tmux.png&quot; alt=&quot;tmux&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;3-ssh-server-접속&quot;&gt;3. ssh server 접속&lt;/h1&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssh han@123.123.12.12
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;output:&lt;br /&gt;
+&lt;img src=&quot;/assets/images/ssh_server.png&quot; alt=&quot;ssh_server&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;4-run&quot;&gt;4. Run&lt;/h1&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/run_ssh.png&quot; alt=&quot;run_ssh&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;터졌지만 중요한게 아니기에…&lt;/p&gt;
+
+&lt;h1 id=&quot;5-log-off&quot;&gt;5. Log-off&lt;/h1&gt;
+
+&lt;p&gt;Ctrl + b 누른 후 d를 누르면 log-off 된다. 터미널이 꺼진 것처럼 보이지만 사실 꺼진 것이 아니다.&lt;/p&gt;
+
+&lt;p&gt;output:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[detached (from session 0)]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/log-off.png&quot; alt=&quot;log-off&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;6-attach&quot;&gt;6. Attach&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;tmux attach
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;를 입력하면 다시 터미널로 돌아가게 된다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/attach.png&quot; alt=&quot;attach&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;출처:&lt;br /&gt;
+&lt;a href=&quot;https://dgkim5360.tistory.com/entry/the-first-steps-for-tmux-terminal-multiplexer&quot;&gt;https://dgkim5360.tistory.com/entry/the-first-steps-for-tmux-terminal-multiplexer&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://m.blog.naver.com/kimmingul/221339305735&quot;&gt;https://m.blog.naver.com/kimmingul/221339305735&lt;/a&gt;&lt;/p&gt;</content><author><name>HanSeokhyeon</name></author><category term="blog" /><summary type="html">ssh server를 이용할 때 로컬에서 터미널을 끄면 서버와의 연결이 끊기며 서버에 프로그램이 종료되는 것이 불편하다. 하지만 tmux를 이용하면 터미널을 꺼도 연결이 끊어지지 않으며 프로그램이 서버에서 계속 작동한다. 그래서 tmux를 사용하고 사용법을 알아보고자 한다.</summary></entry><entry><title type="html">Ubuntu ssh 서버 구축하기</title><link href="http://localhost:4000/ssh-server/" rel="alternate" type="text/html" title="Ubuntu ssh 서버 구축하기" /><published>2019-10-22T03:30:17+09:00</published><updated>2019-10-22T03:30:17+09:00</updated><id>http://localhost:4000/ssh-server</id><content type="html" xml:base="http://localhost:4000/ssh-server/">&lt;p&gt;연구실 서버 컴퓨터에서 docker를 이용해야 할 상황이 생겼다. 그래서 ssh를 이용해 로컬에서 서버로 접속해 docker를 사용하기 위해 ssh 서버 사용하는 법을 공부했고 정리한다.&lt;/p&gt;
+
+&lt;h1 id=&quot;1-ssh-설치&quot;&gt;1. ssh 설치&lt;/h1&gt;
+
+&lt;p&gt;ubuntu에 로컬로 사용하기 위한 클라이언트 프로그램은 존재하지만 openssh-server는 없다. 그래서 설치가 필요하다. 업데이트 후 설치한다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get update
+sudo apt-get install openssh-server
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;2-ssh-서버-서비스-시작&quot;&gt;2. ssh 서버 서비스 시작&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo service ssh start
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;서버를 실행한 후&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;service ssh status
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;로 상태확인을 해보자.&lt;br /&gt;
+output:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;● ssh.service - OpenBSD Secure Shell server
+   Loaded: loaded (/lib/systemd/system/ssh.service; enabled; vendor preset: enab
+   Active: active (running) since Tue 2019-10-22 14:39:25 KST; 27min ago
+ Main PID: 4635 (sshd)
+    Tasks: 1 (limit: 4915)
+   CGroup: /system.slice/ssh.service
+           └─4635 /usr/sbin/sshd -D
+
+10월 22 14:39:25 han-desktop systemd[1]: Starting OpenBSD Secure Shell server...
+10월 22 14:39:25 han-desktop sshd[4635]: Server listening on 0.0.0.0 port 22.
+10월 22 14:39:25 han-desktop sshd[4635]: Server listening on :: port 22.
+10월 22 14:39:25 han-desktop systemd[1]: Started OpenBSD Secure Shell server.
+10월 22 14:39:57 han-desktop sshd[5419]: Did not receive identification string f
+10월 22 14:59:13 han-desktop sshd[5472]: Did not receive identification string f
+10월 22 14:59:14 han-desktop sshd[5473]: pam_unix(sshd:auth): authentication fai
+10월 22 14:59:16 han-desktop sshd[5473]: Failed password for root from 185.197.7
+10월 22 14:59:18 han-desktop sshd[5473]: Connection closed by authenticating use
+lines 1-17/17 (END)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ps -ef | grep sshd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;로 실행중인 ssh 서버의 프로세스를 확인할 수 있다.&lt;br /&gt;
+output:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root      4635     1  0 14:39 ?        00:00:00 /usr/sbin/sshd -D
+han       5631  3459  0 15:08 pts/0    00:00:00 grep --color=auto sshd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo netstat -ntlp | grep sshd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;로 ip주소와 port 번호를 확인할 수 없다.&lt;br /&gt;
+output:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      4635/sshd           
+tcp6       0      0 :::22                   :::*                    LISTEN      4635/sshd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;netstat가 없는 경우는&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt install net-tools
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;로 설치 후 다시 확인.&lt;/p&gt;
+
+&lt;h1 id=&quot;3-내부-ip-주소-확인&quot;&gt;3. 내부 IP 주소 확인&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ifconfig
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;를 통해 현재 서버 컴퓨터에 할당된 IP 주소를 알 수 있다.&lt;br /&gt;
+output:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker0: flags=4099&amp;lt;UP,BROADCAST,MULTICAST&amp;gt;  mtu 1500
+        inet 123.456.7.890  netmask 123.456.7.890  broadcast 123.456.7.890
+        ether 02:42:82:b5:22:84  txqueuelen 0  (Ethernet)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+enp0s31f6: flags=4163&amp;lt;UP,BROADCAST,RUNNING,MULTICAST&amp;gt;  mtu 1500
+        inet 192.268.1.123  netmask 123.456.7.890  broadcast 123.456.7.890
+        inet6 fe80::4f6c:76d6:b51f:aed9  prefixlen 64  scopeid 0x20&amp;lt;link&amp;gt;
+        ether 70:85:c2:69:98:df  txqueuelen 1000  (Ethernet)
+        RX packets 264847  bytes 25393804 (25.3 MB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 2474  bytes 257398 (257.3 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+        device interrupt 16  memory 0xdf100000-df120000  
+
+lo: flags=73&amp;lt;UP,LOOPBACK,RUNNING&amp;gt;  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10&amp;lt;host&amp;gt;
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 530  bytes 48618 (48.6 KB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 530  bytes 48618 (48.6 KB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;docker0는 무시하고 enp0s31f6:에 inet 다음에 있는 것이 내부 IP 주소다.&lt;/p&gt;
+
+&lt;h1 id=&quot;4-ssh-서버-접속하기&quot;&gt;4. ssh 서버 접속하기&lt;/h1&gt;
+
+&lt;p&gt;준비가 끝났다. 이제 접속하자. 로컬에서&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssh [username]@[Hostname]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;와 같이 접속하면 된다&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssh han@192.268.1.123
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;output:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;The authenticity of host '192.268.1.123 (192.268.1.123)' can't be established.
+ECDSA key fingerprint is --------------------------.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added '192.268.1.123' (ECDSA) to the list of known hosts.
+han@192.268.1.123's password: 
+Welcome to Ubuntu 18.04.3 LTS (GNU/Linux 5.0.0-32-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+ * Kata Containers are now fully integrated in Charmed Kubernetes 1.16!
+   Yes, charms take the Krazy out of K8s Kata Kluster Konstruction.
+
+     https://ubuntu.com/kubernetes/docs/release-notes
+
+ * Canonical Livepatch is available for installation.
+   - Reduce system reboots and improve kernel security. Activate at:
+     https://ubuntu.com/livepatch
+
+패키지 0개를  업데이트할 수 있습니다.
+0 업데이트는 보안 업데이트입니다.
+
+Your Hardware Enablement Stack (HWE) is supported until April 2023.
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+han@han-desktop:~$ 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;접속에 성공했다.&lt;/p&gt;
+
+&lt;h1 id=&quot;5-끝내기&quot;&gt;5. 끝내기&lt;/h1&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;exit
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;output:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;로그아웃
+Connection to 192.268.1.123 closed.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;6-추가&quot;&gt;6. 추가&lt;/h1&gt;
+
+&lt;p&gt;기본 포트 22번을 이용하면 보안에 취약하다고들 한다.
+그래서 22를 자신만의 특별한 숫자로 바꾸는 것도 추천한다.
+또한 openssh의 기본 설정으로 비밀번호와 함께 root 권한으로 접속할 수 있다.
+하지만 단순하게 프로그램을 돌릴 계획인데 root 권한은 필요 없을 뿐더러 보안에 악영향을 끼칠 수 있으므로 금지시키는 것도 좋다.
+public key?라 해서 파일형태로 key를 가지고 접속하는 방법도 있다.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;출처:&lt;br /&gt;
+&lt;a href=&quot;https://jimnong.tistory.com/713&quot;&gt;https://jimnong.tistory.com/713&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://cupjoo.tistory.com/98&quot;&gt;https://cupjoo.tistory.com/98&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;http://blog.naver.com/PostView.nhn?blogId=ares157&amp;amp;logNo=220984809651&quot;&gt;http://blog.naver.com/PostView.nhn?blogId=ares157&amp;amp;logNo=220984809651&lt;/a&gt;&lt;/p&gt;</content><author><name>HanSeokhyeon</name></author><category term="blog" /><summary type="html">연구실 서버 컴퓨터에서 docker를 이용해야 할 상황이 생겼다. 그래서 ssh를 이용해 로컬에서 서버로 접속해 docker를 사용하기 위해 ssh 서버 사용하는 법을 공부했고 정리한다.</summary></entry><entry><title type="html">docker 설치하고 jupyter notebook으로 tensorflow하기</title><link href="http://localhost:4000/docker-tutorial/" rel="alternate" type="text/html" title="docker 설치하고 jupyter notebook으로 tensorflow하기" /><published>2019-10-22T02:30:17+09:00</published><updated>2019-10-22T02:30:17+09:00</updated><id>http://localhost:4000/docker-tutorial</id><content type="html" xml:base="http://localhost:4000/docker-tutorial/">&lt;p&gt;로컬이 아닌 공동으로 사용하는 서버에서 딥러닝을 해야할 경우 버젼 충돌 문제가 발생하게 된다. 
+내가 사용하는 TF나 PyTorch 버젼이 다른 사람과 다르다면 docker를 사용하여 환경을 구축하는 것을 추천한다.&lt;/p&gt;
+
+&lt;h1 id=&quot;1-설치-ubuntu&quot;&gt;1. 설치 (Ubuntu)&lt;/h1&gt;
+
+&lt;p&gt;자동 설치 스크립트를 이용해서 설치!&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl -fsSL https://get.docker.com/ | sudo sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;2-root-권한-없이-docker-사용하기&quot;&gt;2. root 권한 없이 docker 사용하기&lt;/h1&gt;
+
+&lt;p&gt;docker는 root권한을 필요로해서 sudo를 추가해주고 비밀번호를 매번 요구한다. 귀찮으므로 없앤다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo usermod -aG docker $USER
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;재부팅하면 적용완료.&lt;/p&gt;
+
+&lt;h1 id=&quot;3-설치-확인&quot;&gt;3. 설치 확인&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker version
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;output:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Client: Docker Engine - Community
+ Version:           19.03.4
+ API version:       1.40
+ Go version:        go1.12.10
+ Git commit:        9013bf583a
+ Built:             Fri Oct 18 15:54:09 2019
+ OS/Arch:           linux/amd64
+ Experimental:      false
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          19.03.4
+  API version:      1.40 (minimum version 1.12)
+  Go version:       go1.12.10
+  Git commit:       9013bf583a
+  Built:            Fri Oct 18 15:52:40 2019
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          1.2.10
+  GitCommit:        b34a5c8af56e510852c35414db4c1f4fa6172339
+ runc:
+  Version:          1.0.0-rc8+dev
+  GitCommit:        3e425f80a8c931f88e6d94a8c831b9d5aa481657
+ docker-init:
+  Version:          0.18.0
+  GitCommit:        fec3683
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;만약 2번을 실행하고 재부팅을 하지 않았다면 Server 정보가 나오지 않는다.&lt;/p&gt;
+
+&lt;h1 id=&quot;4-run-tensorflow-공식-이미지&quot;&gt;4. Run TensorFlow 공식 이미지&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker run -it -p 8888:8888 tensorflow/tensorflow
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;아마 tensorflow/tensorflow docker이미지가 없을것이기 때문에 설치를 장시간 진행할 것이다. tensorflow/tensorflow 이미지는 tensorflow cpu 버전이며 원래는 jupyter notebook이 자동으로 실행된다고 했는데 나는 이상하게 안됐다…&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ docker run -it -p 8888:8888 tensorflow/tensorflow
+
+________                               _______________                
+___  __/__________________________________  ____/__  /________      __
+__  /  _  _ \_  __ \_  ___/  __ \_  ___/_  /_   __  /_  __ \_ | /| / /
+_  /   /  __/  / / /(__  )/ /_/ /  /   _  __/   _  / / /_/ /_ |/ |/ / 
+/_/    \___//_/ /_//____/ \____//_/    /_/      /_/  \____/____/|__/
+
+
+WARNING: You are running this container as root, which can cause new files in
+mounted volumes to be created as the root user on your host machine.
+
+To avoid this, run the container by specifying your user's userid:
+
+$ docker run -u $(id -u):$(id -g) args...
+
+root@ae73f71e625d:/#
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이런식으로 실행이 되고 터미널이 떴다.&lt;/p&gt;
+
+&lt;p&gt;이후 jupyter notebook을 실행해보았다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;root@ae73f71e625d:/# jupyter notebook
+bash: jupyter: command not found
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;하지만 없단다. 그래서 설치를 해줬다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip install jupyter notebook
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;참고로 python 버전은 2.7이다. jupyter notebook 설치 이후 실행해보았다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;socket.error: [Errno 99] Cannot assign requested address
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;머라머라 에러가 난다. 위에서 pip를 업그레이드 하라는 경고를 줬기때문에 업그레이드해줬다. 하지만 그래도 에러가 난다. 아마 업데이트를 해줘야하는듯하다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;apt-get update
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;docker에서 터미널에 sudo를 치면 없는 명령어라고 하더라. 그래도 안되서 찾아보니깐 local에서 실행 안해서 IP가 안맞는다뭐라나… 결론은 이거다&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;jupyter notebook --ip=0.0.0.0 --allow-root
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;output:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[I 05:01:58.014 NotebookApp] Serving notebooks from local directory: /
+[I 05:01:58.014 NotebookApp] The Jupyter Notebook is running at:
+[I 05:01:58.014 NotebookApp] http://(ae73f71e625d or 127.0.0.1):8888/?token=54bc8c34b32e8fa4d3227284afe146c779f9327be4107b52
+[I 05:01:58.014 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[W 05:01:58.020 NotebookApp] No web browser found: could not locate runnable browser.
+[C 05:01:58.020 NotebookApp] 
+    
+    To access the notebook, open this file in a browser:
+        file:///root/.local/share/jupyter/runtime/nbserver-411-open.html
+    Or copy and paste one of these URLs:
+        http://(ae73f71e625d or 127.0.0.1):8888/?token=54bc8c34b32e8fa4d3227284afe146c779f9327be4107b52
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이렇게 마지막에 URLs를 알려주는데 주소에 or이 있다. http://127.0.0.1:8888/?token=54bc8c34b32e8fa4d3227284afe146c779f9327be4107b52 와 같이 앞부분 없애고 실행하니 정상작동한다.&lt;/p&gt;
+
+&lt;p&gt;휴…&lt;/p&gt;
+
+&lt;h1 id=&quot;5-tensorflow-hello-world-예제&quot;&gt;5. TensorFlow hello world 예제&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import tensorflow as tf
+
+hello = tf.constant('Hello, TensorFlow!')
+
+sess = tf.Session()
+
+print(sess.run(hello))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;별 생각없이 실행했더니 Session()이 없는 거란다. 그렇다 tensorflow 2.0이다.(안써봄 ㅎ)&lt;/p&gt;
+
+&lt;p&gt;공홈에서 예제를 가져왔다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tensorflow&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;mnist&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;datasets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mnist&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y_test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mnist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;load_data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;x_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x_test&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x_train&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;255.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x_test&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;255.0&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;models&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Sequential&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Flatten&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;input_shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;28&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;28&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;activation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'relu'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Dropout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;tf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;keras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;layers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Dense&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;activation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'softmax'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;compile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;optimizer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'adam'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+              &lt;span class=&quot;n&quot;&gt;loss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'sparse_categorical_crossentropy'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+              &lt;span class=&quot;n&quot;&gt;metrics&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'accuracy'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y_train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;epochs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;evaluate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x_test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;y_test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;verbose&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;output:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz
+11493376/11490434 [==============================] - 1s 0us/step
+11501568/11490434 [==============================] - 1s 0us/step
+Train on 60000 samples
+Epoch 1/5
+60000/60000 [==============================] - 13s 216us/sample - loss: 0.2952 - accuracy: 0.9141
+Epoch 2/5
+60000/60000 [==============================] - 11s 181us/sample - loss: 0.1423 - accuracy: 0.9574
+Epoch 3/5
+60000/60000 [==============================] - 11s 188us/sample - loss: 0.1058 - accuracy: 0.9686
+Epoch 4/5
+60000/60000 [==============================] - 11s 191us/sample - loss: 0.0855 - accuracy: 0.9735
+Epoch 5/5
+60000/60000 [==============================] - 13s 217us/sample - loss: 0.0734 - accuracy: 0.9766
+10000/1 - 1s - loss: 0.0362 - accuracy: 0.9782
+
+[0.07176612680561374, 0.9782]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;잘된다.&lt;/p&gt;
+
+&lt;h1 id=&quot;6-docker-container-commit하기&quot;&gt;6. Docker container commit하기&lt;/h1&gt;
+&lt;p&gt;기껏 jupyter notebook 다 설치했는데 날릴 수 없다. 그러므로 docker 종료 전에 이미지에 commit해서 변경사항을 등록해줘야한다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker images
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;를 입력해 이미지를 확인하면&lt;br /&gt;
+output:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;REPOSITORY              TAG                 IMAGE ID            CREATED             SIZE
+tensorflow/tensorflow   latest              d64a95598d6c        2 weeks ago         1.03GB
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;와 같은 식으로 이미지의 내용이 출력된다. commit을 하기 위해서는 container의 ID가 필요하다. 아래의 명령어를 사용하면 알 수 있다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker ps -a
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;output:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;CONTAINER ID        IMAGE                   COMMAND             CREATED             STATUS                    PORTS                    NAMES
+ae73f71e625d        tensorflow/tensorflow   &quot;/bin/bash&quot;         About an hour ago   Up About an hour          0.0.0.0:8888-&amp;gt;8888/tcp   pensive_buck
+f585a03cd7ae        tensorflow/tensorflow   &quot;/bin/bash&quot;         19 hours ago        Exited (0) 19 hours ago                            wizardly_haslett
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;복잡해 보이지만 첫번재 있는게 container ID다. 복사한후&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker commit ae73f71e625d tensorflow/tensorflow
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;output:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sha256:b47a8c553c49e9f8db060811feba1ad69725390580f1112a37d68927d7b2938c
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;라는 결과를 볼 수 있다.&lt;/p&gt;
+
+&lt;p&gt;다시&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;docker images
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;를 입력하면&lt;br /&gt;
+output:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;REPOSITORY              TAG                 IMAGE ID            CREATED             SIZE
+tensorflow/tensorflow   latest              b47a8c553c49        8 seconds ago       1.15GB
+tensorflow/tensorflow   &amp;lt;none&amp;gt;              d64a95598d6c        2 weeks ago         1.03GB
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;를 얻을 수 있고, 8초전에 하나 추가되었다. SIZE가 증가한거 보니 제대로 된거 같다. 귀찮아서 테스트 안해본건 아니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;출처:&lt;br /&gt;
+&lt;a href=&quot;http://moducon.kr/2018/wp-content/uploads/sites/2/2018/12/leesangsoo_slide.pdf&quot;&gt;http://moducon.kr/2018/wp-content/uploads/sites/2/2018/12/leesangsoo_slide.pdf&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.tensorflow.org/install/docker?hl=ko&quot;&gt;https://www.tensorflow.org/install/docker?hl=ko&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.tensorflow.org/tutorials/quickstart/beginner&quot;&gt;https://www.tensorflow.org/tutorials/quickstart/beginner&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://pbj0812.tistory.com/134&quot;&gt;https://pbj0812.tistory.com/134&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://subicura.com/2017/01/19/docker-guide-for-beginners-2.html&quot;&gt;https://subicura.com/2017/01/19/docker-guide-for-beginners-2.html&lt;/a&gt;
+&lt;a href=&quot;https://nicewoong.github.io/development/2018/03/06/docker-commit-container/&quot;&gt;https://nicewoong.github.io/development/2018/03/06/docker-commit-container/&lt;/a&gt;&lt;/p&gt;</content><author><name>HanSeokhyeon</name></author><category term="blog" /><summary type="html">로컬이 아닌 공동으로 사용하는 서버에서 딥러닝을 해야할 경우 버젼 충돌 문제가 발생하게 된다. 내가 사용하는 TF나 PyTorch 버젼이 다른 사람과 다르다면 docker를 사용하여 환경을 구축하는 것을 추천한다.</summary></entry><entry><title type="html">docker 볼륨 공유</title><link href="http://localhost:4000/docker-share-volume/" rel="alternate" type="text/html" title="docker 볼륨 공유" /><published>2019-10-22T01:30:17+09:00</published><updated>2019-10-22T01:30:17+09:00</updated><id>http://localhost:4000/docker-share-volume</id><content type="html" xml:base="http://localhost:4000/docker-share-volume/">&lt;p&gt;docker를 사용할 때 필요한 데이터는 호스트와 공유해서 사용하는 것이 편리하다. 그러므로 docker의 볼륨 공유 기능을 사용해서 폴더나 파일을 호스트와 컨테이너 간에 공유한다.&lt;/p&gt;
+
+&lt;h1 id=&quot;1-공유할-폴더와-파일-생성&quot;&gt;1. 공유할 폴더와 파일 생성&lt;/h1&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mkdir docker_share
+cd docker_share
+vi test.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/testpy.png&quot; alt=&quot;testpy&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;2-docker-run&quot;&gt;2. docker run&lt;/h1&gt;
+&lt;p&gt;```&lt;/p&gt;</content><author><name>HanSeokhyeon</name></author><category term="blog" /><summary type="html">docker를 사용할 때 필요한 데이터는 호스트와 공유해서 사용하는 것이 편리하다. 그러므로 docker의 볼륨 공유 기능을 사용해서 폴더나 파일을 호스트와 컨테이너 간에 공유한다.</summary></entry><entry><title type="html">파이썬에서 librosa 패키지로 스펙트럼 그리기</title><link href="http://localhost:4000/plot-spectrum/" rel="alternate" type="text/html" title="파이썬에서 librosa 패키지로 스펙트럼 그리기" /><published>2019-10-18T16:30:17+09:00</published><updated>2019-10-18T16:30:17+09:00</updated><id>http://localhost:4000/plot-spectrum</id><content type="html" xml:base="http://localhost:4000/plot-spectrum/">&lt;p&gt;프로젝트에서 파형의 스펙트럼을 그려서 분석할 일이 있어 코드를 작성해보았다.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -69,7 +523,7 @@ fig.savefig('boeing.png')
 
 &lt;h3 id=&quot;결과물&quot;&gt;결과물&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/boeing.png&quot; alt=&quot;boeing&quot; /&gt;&lt;/p&gt;</content><author><name>Han Seokhyeon</name></author><summary type="html">프로젝트에서 파형의 스펙트럼을 그려서 분석할 일이 있어 코드를 작성해보았다.</summary></entry><entry><title type="html">파이썬 pow 함수</title><link href="http://localhost:4000/2019/10/17/pow-function.html" rel="alternate" type="text/html" title="파이썬 pow 함수" /><published>2019-10-17T00:00:00+09:00</published><updated>2019-10-17T00:00:00+09:00</updated><id>http://localhost:4000/2019/10/17/pow-function</id><content type="html" xml:base="http://localhost:4000/2019/10/17/pow-function.html">&lt;p&gt;알고리즘 문제를 풀던중 pow(x, y, z)와 같이 3번째 인자를 사용한 경우가 나와서 찾아보게 되었다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/boeing.png&quot; alt=&quot;boeing&quot; /&gt;&lt;/p&gt;</content><author><name>HanSeokhyeon</name></author><category term="blog" /><summary type="html">프로젝트에서 파형의 스펙트럼을 그려서 분석할 일이 있어 코드를 작성해보았다.</summary></entry><entry><title type="html">파이썬 pow 함수</title><link href="http://localhost:4000/pow-function/" rel="alternate" type="text/html" title="파이썬 pow 함수" /><published>2019-10-17T05:30:17+09:00</published><updated>2019-10-17T05:30:17+09:00</updated><id>http://localhost:4000/pow-function</id><content type="html" xml:base="http://localhost:4000/pow-function/">&lt;p&gt;알고리즘 문제를 풀던중 pow(x, y, z)와 같이 3번째 인자를 사용한 경우가 나와서 찾아보게 되었다.&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; pow(2, 4, 3)
 1
@@ -89,7 +543,7 @@ fig.savefig('boeing.png')
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;출처: &lt;a href=&quot;https://m.blog.naver.com/PostView.nhn?blogId=wideeyed&amp;amp;logNo=221137999832&amp;amp;proxyReferer=https%3A%2F%2Fwww.google.com%2F&quot;&gt;https://m.blog.naver.com/PostView.nhn?blogId=wideeyed&amp;amp;logNo=221137999832&amp;amp;proxyReferer=https%3A%2F%2Fwww.google.com%2F&lt;/a&gt;&lt;/p&gt;</content><author><name>Han Seokhyeon</name></author><summary type="html">알고리즘 문제를 풀던중 pow(x, y, z)와 같이 3번째 인자를 사용한 경우가 나와서 찾아보게 되었다.</summary></entry><entry><title type="html">마크다운에 링크 삽입하기</title><link href="http://localhost:4000/2019/10/17/markdown-link.html" rel="alternate" type="text/html" title="마크다운에 링크 삽입하기" /><published>2019-10-17T00:00:00+09:00</published><updated>2019-10-17T00:00:00+09:00</updated><id>http://localhost:4000/2019/10/17/markdown-link</id><content type="html" xml:base="http://localhost:4000/2019/10/17/markdown-link.html">&lt;p&gt;마크다운으로 블로그에 포스팅하다보니 링크를 달아야 할 일이 있어 찾아보았다.&lt;/p&gt;
+&lt;p&gt;출처: &lt;a href=&quot;https://m.blog.naver.com/PostView.nhn?blogId=wideeyed&amp;amp;logNo=221137999832&amp;amp;proxyReferer=https%3A%2F%2Fwww.google.com%2F&quot;&gt;https://m.blog.naver.com/PostView.nhn?blogId=wideeyed&amp;amp;logNo=221137999832&amp;amp;proxyReferer=https%3A%2F%2Fwww.google.com%2F&lt;/a&gt;&lt;/p&gt;</content><author><name>HanSeokhyeon</name></author><category term="blog" /><summary type="html">알고리즘 문제를 풀던중 pow(x, y, z)와 같이 3번째 인자를 사용한 경우가 나와서 찾아보게 되었다.</summary></entry><entry><title type="html">마크다운에 링크 삽입하기</title><link href="http://localhost:4000/markdown-link/" rel="alternate" type="text/html" title="마크다운에 링크 삽입하기" /><published>2019-10-17T04:30:17+09:00</published><updated>2019-10-17T04:30:17+09:00</updated><id>http://localhost:4000/markdown-link</id><content type="html" xml:base="http://localhost:4000/markdown-link/">&lt;p&gt;마크다운으로 블로그에 포스팅하다보니 링크를 달아야 할 일이 있어 찾아보았다.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -109,7 +563,23 @@ fig.savefig('boeing.png')
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;출처: &lt;a href=&quot;https://opentutorials.org/module/782/6083&quot;&gt;https://opentutorials.org/module/782/6083&lt;/a&gt;&lt;/p&gt;</content><author><name>Han Seokhyeon</name></author><summary type="html">마크다운으로 블로그에 포스팅하다보니 링크를 달아야 할 일이 있어 찾아보았다.</summary></entry><entry><title type="html">ANC 논문 정리</title><link href="http://localhost:4000/2019/10/17/anc-article.html" rel="alternate" type="text/html" title="ANC 논문 정리" /><published>2019-10-17T00:00:00+09:00</published><updated>2019-10-17T00:00:00+09:00</updated><id>http://localhost:4000/2019/10/17/anc-article</id><content type="html" xml:base="http://localhost:4000/2019/10/17/anc-article.html">&lt;p&gt;프로젝트하면서 유명한 ANC 논문들의 실험 스펙을 정리할 필요가 있어 포스팅하게 되었다.&lt;/p&gt;
+&lt;p&gt;출처: &lt;a href=&quot;https://opentutorials.org/module/782/6083&quot;&gt;https://opentutorials.org/module/782/6083&lt;/a&gt;&lt;/p&gt;</content><author><name>HanSeokhyeon</name></author><category term="blog" /><summary type="html">마크다운으로 블로그에 포스팅하다보니 링크를 달아야 할 일이 있어 찾아보았다.</summary></entry><entry><title type="html">포스트에 사진 넣기</title><link href="http://localhost:4000/image-in-post/" rel="alternate" type="text/html" title="포스트에 사진 넣기" /><published>2019-10-17T03:30:17+09:00</published><updated>2019-10-17T03:30:17+09:00</updated><id>http://localhost:4000/image-in-post</id><content type="html" xml:base="http://localhost:4000/image-in-post/">&lt;p&gt;New York
+&lt;img src=&quot;http://localhost:4000/assets/images/newyork.jpg&quot; alt=&quot;newyork&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;마크다운 예제는 이러하다&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;New York
+![newyork]({{&quot;/assets/images/newyork.jpg&quot;|absolute_url}})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>HanSeokhyeon</name></author><category term="blog" /><summary type="html">New York</summary></entry><entry><title type="html">터미널에서 git 사용시 자동으로 로그인 하는 방법</title><link href="http://localhost:4000/github-autologin/" rel="alternate" type="text/html" title="터미널에서 git 사용시 자동으로 로그인 하는 방법" /><published>2019-10-17T02:30:17+09:00</published><updated>2019-10-17T02:30:17+09:00</updated><id>http://localhost:4000/github-autologin</id><content type="html" xml:base="http://localhost:4000/github-autologin/">&lt;p&gt;코드를 수정후 github에 push할 때마다 로그인하는 것은 매우 귀찮아서 찾아보았다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git config credential.helper store
+$ git push https://github.com/HanSeokhyeon/hanseokhyeon.github.io.git
+Username for 'https://github.com': HanSeokhyeon
+Password for 'https://HanSeokhyeon@github.com': 
+Everything up-to-date
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;출처 : &lt;a href=&quot;https://franzpark.github.io/git-permanent-authentication/&quot;&gt;https://franzpark.github.io/git-permanent-authentication/&lt;/a&gt;&lt;/p&gt;</content><author><name>HanSeokhyeon</name></author><category term="blog" /><summary type="html">코드를 수정후 github에 push할 때마다 로그인하는 것은 매우 귀찮아서 찾아보았다.</summary></entry><entry><title type="html">ANC 논문 정리</title><link href="http://localhost:4000/anc-article/" rel="alternate" type="text/html" title="ANC 논문 정리" /><published>2019-10-17T01:30:17+09:00</published><updated>2019-10-17T01:30:17+09:00</updated><id>http://localhost:4000/anc-article</id><content type="html" xml:base="http://localhost:4000/anc-article/">&lt;p&gt;프로젝트하면서 유명한 ANC 논문들의 실험 스펙을 정리할 필요가 있어 포스팅하게 되었다.&lt;/p&gt;
 
 &lt;h1 id=&quot;a-robust-hybrid-feedback-active-noise-cancellation-headset&quot;&gt;A Robust Hybrid Feedback Active Noise Cancellation Headset&lt;/h1&gt;
 
@@ -229,26 +699,4 @@ SM Kuo 저술 - 2006 - 150회 인용&lt;/p&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;결론&quot;&gt;결론&lt;/h1&gt;
-&lt;p&gt;현재 나의 실험 상태와 크게 다르지 않은 것 같다. 나는 현재 10가지의 노이즈 데이터를 가지고 실험중인데 위 논문들은 데이터가 너무 부족하다. 그래도 filter tab 길이나 등등 정보를 얻을 수 있었다.&lt;/p&gt;</content><author><name>Han Seokhyeon</name></author><summary type="html">프로젝트하면서 유명한 ANC 논문들의 실험 스펙을 정리할 필요가 있어 포스팅하게 되었다.</summary></entry><entry><title type="html">터미널에서 git 사용시 자동으로 로그인 하는 방법</title><link href="http://localhost:4000/2019/10/17/github-autologin.html" rel="alternate" type="text/html" title="터미널에서 git 사용시 자동으로 로그인 하는 방법" /><published>2019-10-17T00:00:00+09:00</published><updated>2019-10-17T00:00:00+09:00</updated><id>http://localhost:4000/2019/10/17/github-autologin</id><content type="html" xml:base="http://localhost:4000/2019/10/17/github-autologin.html">&lt;p&gt;코드를 수정후 github에 push할 때마다 로그인하는 것은 매우 귀찮아서 찾아보았다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ git config credential.helper store
-$ git push https://github.com/HanSeokhyeon/hanseokhyeon.github.io.git
-Username for 'https://github.com': HanSeokhyeon
-Password for 'https://HanSeokhyeon@github.com': 
-Everything up-to-date
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;출처 : &lt;a href=&quot;https://franzpark.github.io/git-permanent-authentication/&quot;&gt;https://franzpark.github.io/git-permanent-authentication/&lt;/a&gt;&lt;/p&gt;</content><author><name>Han Seokhyeon</name></author><summary type="html">코드를 수정후 github에 push할 때마다 로그인하는 것은 매우 귀찮아서 찾아보았다.</summary></entry><entry><title type="html">포스트에 사진 넣기</title><link href="http://localhost:4000/2019/10/17/image-in-post.html" rel="alternate" type="text/html" title="포스트에 사진 넣기" /><published>2019-10-17T00:00:00+09:00</published><updated>2019-10-17T00:00:00+09:00</updated><id>http://localhost:4000/2019/10/17/image-in-post</id><content type="html" xml:base="http://localhost:4000/2019/10/17/image-in-post.html">&lt;p&gt;New York
-&lt;img src=&quot;http://localhost:4000/assets/images/newyork.jpg&quot; alt=&quot;newyork&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;마크다운 예제는 이러하다&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;New York
-![newyork]({{&quot;/assets/images/newyork.jpg&quot;|absolute_url}})
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Han Seokhyeon</name></author><summary type="html">New York</summary></entry><entry><title type="html">2차원 배열에서 본인을 제외한 min 구하기</title><link href="http://localhost:4000/2019/10/15/2d-array-min-except-me.html" rel="alternate" type="text/html" title="2차원 배열에서 본인을 제외한 min 구하기" /><published>2019-10-15T00:00:00+09:00</published><updated>2019-10-15T00:00:00+09:00</updated><id>http://localhost:4000/2019/10/15/2d-array-min-except-me</id><content type="html" xml:base="http://localhost:4000/2019/10/15/2d-array-min-except-me.html">&lt;p&gt;질문이 들어와서 고민하다가 내가 생각한 방법을 남긴다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;arr[i, j] = inf
-min_value = np.min(arr)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Han Seokhyeon</name></author><summary type="html">질문이 들어와서 고민하다가 내가 생각한 방법을 남긴다.</summary></entry><entry><title type="html">첫글!</title><link href="http://localhost:4000/2019/10/02/welcome-to-jekyll.html" rel="alternate" type="text/html" title="첫글!" /><published>2019-10-02T16:30:17+09:00</published><updated>2019-10-02T16:30:17+09:00</updated><id>http://localhost:4000/2019/10/02/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/2019/10/02/welcome-to-jekyll.html">&lt;p&gt;기록을 남기기 위해 시작한 블로그입니다.&lt;/p&gt;
-
-&lt;p&gt;문의가 있으면 언제든지 연락주세요!&lt;/p&gt;</content><author><name>Han Seokhyeon</name></author><summary type="html">기록을 남기기 위해 시작한 블로그입니다.</summary></entry></feed>
+&lt;p&gt;현재 나의 실험 상태와 크게 다르지 않은 것 같다. 나는 현재 10가지의 노이즈 데이터를 가지고 실험중인데 위 논문들은 데이터가 너무 부족하다. 그래도 filter tab 길이나 등등 정보를 얻을 수 있었다.&lt;/p&gt;</content><author><name>HanSeokhyeon</name></author><category term="blog" /><summary type="html">프로젝트하면서 유명한 ANC 논문들의 실험 스펙을 정리할 필요가 있어 포스팅하게 되었다.</summary></entry></feed>

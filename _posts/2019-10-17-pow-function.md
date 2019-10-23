@@ -1,6 +1,9 @@
 ---
 layout: post
 title: 파이썬 pow 함수
+date:   2019-10-17 05:30:17 +0900
+category: blog
+author: HanSeokhyeon
 ---
 
 알고리즘 문제를 풀던중 pow(x, y, z)와 같이 3번째 인자를 사용한 경우가 나와서 찾아보게 되었다.

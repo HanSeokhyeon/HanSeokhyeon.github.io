@@ -1,6 +1,9 @@
 ---
 layout: post
 title: docker 설치하고 jupyter notebook으로 tensorflow하기
+date:   2019-10-22 02:30:17 +0900
+category: blog
+author: HanSeokhyeon
 ---
 
 

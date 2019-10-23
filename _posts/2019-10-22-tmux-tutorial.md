@@ -1,6 +1,9 @@
 ---
 layout: post
 title: tmux 사용법
+date:   2019-10-22 04:30:17 +0900
+category: blog
+author: HanSeokhyeon
 ---
 
 ssh server를 이용할 때 로컬에서 터미널을 끄면 서버와의 연결이 끊기며 서버에 프로그램이 종료되는 것이 불편하다. 

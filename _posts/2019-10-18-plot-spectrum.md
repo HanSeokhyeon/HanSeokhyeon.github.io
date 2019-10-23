@@ -1,6 +1,9 @@
 ---
 layout: post
 title : 파이썬에서 librosa 패키지로 스펙트럼 그리기
+date:   2019-10-18 16:30:17 +0900
+category: blog
+author: HanSeokhyeon
 ---
 
 프로젝트에서 파형의 스펙트럼을 그려서 분석할 일이 있어 코드를 작성해보았다.

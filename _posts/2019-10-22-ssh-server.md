@@ -1,6 +1,9 @@
 ---
 layout: post
 title: Ubuntu ssh 서버 구축하기
+date:   2019-10-22 03:30:17 +0900
+category: blog
+author: HanSeokhyeon
 ---
 
 연구실 서버 컴퓨터에서 docker를 이용해야 할 상황이 생겼다. 그래서 ssh를 이용해 로컬에서 서버로 접속해 docker를 사용하기 위해 ssh 서버 사용하는 법을 공부했고 정리한다.

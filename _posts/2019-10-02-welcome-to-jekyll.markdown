@@ -2,6 +2,8 @@
 layout: post
 title:  "첫글!"
 date:   2019-10-02 16:30:17 +0900
+category: blog
+author: HanSeokhyeon
 ---
 
 기록을 남기기 위해 시작한 블로그입니다.

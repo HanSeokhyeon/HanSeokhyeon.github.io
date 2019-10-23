@@ -1,6 +1,9 @@
 ---
 layout: post
 title: 터미널에서 git 사용시 자동으로 로그인 하는 방법
+date:   2019-10-17 02:30:17 +0900
+category: blog
+author: HanSeokhyeon
 ---
 
 코드를 수정후 github에 push할 때마다 로그인하는 것은 매우 귀찮아서 찾아보았다.

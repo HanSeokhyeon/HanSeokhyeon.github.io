@@ -1,6 +1,9 @@
 ---
 layout: post
 title: ANC 논문 정리
+date:   2019-10-17 01:30:17 +0900
+category: blog
+author: HanSeokhyeon
 ---
 
 프로젝트하면서 유명한 ANC 논문들의 실험 스펙을 정리할 필요가 있어 포스팅하게 되었다.

@@ -1,6 +1,9 @@
 ---
 layout: post
 title: 마크다운에 링크 삽입하기
+date:   2019-10-17 04:30:17 +0900
+category: blog
+author: HanSeokhyeon
 ---
 
 마크다운으로 블로그에 포스팅하다보니 링크를 달아야 할 일이 있어 찾아보았다.
