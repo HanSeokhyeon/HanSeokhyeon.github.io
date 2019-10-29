@@ -74,3 +74,7 @@ hello world
 
 잘 실행된다.  
 Visual studio라는 강력한 IDE를 사용하다보니 vim로 C code를 개발하기는 매우 불편할 수 있다. 하지만 많은 IT회사가 C를 리눅스 기반으로 개발하니 피해갈 수 없는 도전이라고 생각한다.
+
+---
+출처:
+<https://byd0105.tistory.com/9>
