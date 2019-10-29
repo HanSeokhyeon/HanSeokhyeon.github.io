@@ -1,4 +1,62 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-23T18:47:39+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Han Seokhyeon</title><subtitle>A blog about technology and stuff related</subtitle><entry><title type="html">tmux 사용법</title><link href="http://localhost:4000/tmux-tutorial/" rel="alternate" type="text/html" title="tmux 사용법" /><published>2019-10-22T04:30:17+09:00</published><updated>2019-10-22T04:30:17+09:00</updated><id>http://localhost:4000/tmux-tutorial</id><content type="html" xml:base="http://localhost:4000/tmux-tutorial/">&lt;p&gt;ssh server를 이용할 때 로컬에서 터미널을 끄면 서버와의 연결이 끊기며 서버에 프로그램이 종료되는 것이 불편하다. 
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-29T17:00:06+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Han Seokhyeon</title><subtitle>A blog about technology and stuff related</subtitle><entry><title type="html">gcc 설치 및 사용법</title><link href="http://localhost:4000/gcc-tutorial/" rel="alternate" type="text/html" title="gcc 설치 및 사용법" /><published>2019-10-29T16:37:17+09:00</published><updated>2019-10-29T16:37:17+09:00</updated><id>http://localhost:4000/gcc-tutorial</id><content type="html" xml:base="http://localhost:4000/gcc-tutorial/">&lt;p&gt;리눅스에서 C언어 개발 환경을 구축하기 위해 gcc를 사용해본다.&lt;/p&gt;
+
+&lt;h1 id=&quot;1-설치&quot;&gt;1. 설치&lt;/h1&gt;
+
+&lt;p&gt;보통 우분투를 설치하면 gcc는 설치되어있다.
+아래의 명령어를 통해 설치여부를 확인해보자.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gcc
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;output:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gcc: fatal error: no input files
+compilation terminated.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이렇게 나오면 설치되어 있는 것이다.
+버젼을 확인해보자.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gcc --version
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;output:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gcc (Ubuntu 7.4.0-1ubuntu1~18.04.1) 7.4.0
+Copyright (C) 2017 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;이러하다.&lt;/p&gt;
+
+&lt;p&gt;만약 설치가 안되어 있다면&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install gcc
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;를 통해 설치하자.&lt;/p&gt;
+
+&lt;h1 id=&quot;2-testc&quot;&gt;2. test.c&lt;/h1&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vim test.c
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;를 터미널에 쳐서 test.c 파일을 만들 준비를 하자.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/testc.png&quot; alt=&quot;testc&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;vim 단축키를 잠시 설명하자면 a는 입력모드, ESC는 모드 나가기, x는 지우기, :wq는 저장후 종료다.&lt;/p&gt;
+
+&lt;p&gt;:wq를 했으면 아마 home에 test.c가 생겼을 것이다. 
+ls 명령어로 각자 확인하자.
+이제 gcc 컴파일러를 통해 object 파일을 생성해보자.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gcc -o test test.c
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;생성한 후 ls 명령어로 test라는 object 파일이 생성된 것을 확인해보자.
+생성이 되었다면 파일을 실행해보자.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./test
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;output:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;hello world
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;잘 실행된다.&lt;br /&gt;
+Visual studio라는 강력한 IDE를 사용하다보니 vim로 C code를 개발하기는 매우 불편할 수 있다. 하지만 많은 IT회사가 C를 리눅스 기반으로 개발하니 피해갈 수 없는 도전이라고 생각한다.&lt;/p&gt;</content><author><name>HanSeokhyeon</name></author><category term="blog" /><summary type="html">리눅스에서 C언어 개발 환경을 구축하기 위해 gcc를 사용해본다.</summary></entry><entry><title type="html">tmux 사용법</title><link href="http://localhost:4000/tmux-tutorial/" rel="alternate" type="text/html" title="tmux 사용법" /><published>2019-10-22T04:30:17+09:00</published><updated>2019-10-22T04:30:17+09:00</updated><id>http://localhost:4000/tmux-tutorial</id><content type="html" xml:base="http://localhost:4000/tmux-tutorial/">&lt;p&gt;ssh server를 이용할 때 로컬에서 터미널을 끄면 서버와의 연결이 끊기며 서버에 프로그램이 종료되는 것이 불편하다. 
 하지만 tmux를 이용하면 터미널을 꺼도 연결이 끊어지지 않으며 프로그램이 서버에서 계속 작동한다. 
 그래서 tmux를 사용하고 사용법을 알아보고자 한다.&lt;/p&gt;
 
@@ -579,124 +637,4 @@ Password for 'https://HanSeokhyeon@github.com':
 Everything up-to-date
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;출처 : &lt;a href=&quot;https://franzpark.github.io/git-permanent-authentication/&quot;&gt;https://franzpark.github.io/git-permanent-authentication/&lt;/a&gt;&lt;/p&gt;</content><author><name>HanSeokhyeon</name></author><category term="blog" /><summary type="html">코드를 수정후 github에 push할 때마다 로그인하는 것은 매우 귀찮아서 찾아보았다.</summary></entry><entry><title type="html">ANC 논문 정리</title><link href="http://localhost:4000/anc-article/" rel="alternate" type="text/html" title="ANC 논문 정리" /><published>2019-10-17T01:30:17+09:00</published><updated>2019-10-17T01:30:17+09:00</updated><id>http://localhost:4000/anc-article</id><content type="html" xml:base="http://localhost:4000/anc-article/">&lt;p&gt;프로젝트하면서 유명한 ANC 논문들의 실험 스펙을 정리할 필요가 있어 포스팅하게 되었다.&lt;/p&gt;
-
-&lt;h1 id=&quot;a-robust-hybrid-feedback-active-noise-cancellation-headset&quot;&gt;A Robust Hybrid Feedback Active Noise Cancellation Headset&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://core.ac.uk/download/pdf/83936972.pdf&quot;&gt;논문 링크&lt;/a&gt;&lt;br /&gt;
-Y Song 저술 - 2005 - 99회 인용&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Active noise cancellation (ANC), feedback control, filtered-x least-mean-square (FXLMS), headset&lt;/li&gt;
-  &lt;li&gt;Sampling rate of sound card : 8 kHz&lt;/li&gt;
-  &lt;li&gt;Sampling rate : 2 kHz&lt;/li&gt;
-  &lt;li&gt;Filter tab : 64&lt;/li&gt;
-  &lt;li&gt;Test data : a 230 Hz tone embedded in wideband noise&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;구조&quot;&gt;구조&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/images/article1/fig6.png&quot; alt=&quot;fig6&quot; /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;특징&quot;&gt;특징&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Analog와 digital ANC를 동시에 사용해 hybrid ANC를 구현했다.&lt;/li&gt;
-  &lt;li&gt;H(s)는 second-order highpass filter&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;실험결과&quot;&gt;실험결과&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/images/article1/fig10.png&quot; alt=&quot;fig10&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;100~600 Hz까지 ANC를 해서 그래프를 600 Hz까지만 그렸다.&lt;/p&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;The sampling rate is 2 kHz, and the cutoff
-frequency of the anti-aliasing and reconstruction lowpass filters
-is 600 Hz. The working frequency of this prototype is from
-100 Hz to 600 Hz, and the headset shells that cover the ears can
-effectively attenuate noise higher than 600 Hz.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;active-noise-control-system-for-headphone-applications&quot;&gt;Active Noise Control System for Headphone Applications&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;amp;arnumber=1597204&quot;&gt;논문 링크&lt;/a&gt;&lt;br /&gt;
-SM Kuo 저술 - 2006 - 150회 인용&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Active noise control (ANC), adaptive feedback ANC systems, ANC headphones, error sensor optimization, secondary path modeling&lt;/li&gt;
-  &lt;li&gt;Sampling rate : 8 kHz&lt;/li&gt;
-  &lt;li&gt;Filter tab
-    &lt;ul&gt;
-      &lt;li&gt;secondary path filter : 65&lt;/li&gt;
-      &lt;li&gt;ANC filter : 110&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Step size
-    &lt;ul&gt;
-      &lt;li&gt;secondary path filter : 0.05&lt;/li&gt;
-      &lt;li&gt;ANC filter : 0.3&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Test data
-    &lt;ul&gt;
-      &lt;li&gt;0 ~ 2 kHz까지 100 Hz씩 상승하는 sinusoidal noises&lt;/li&gt;
-      &lt;li&gt;engine noise
-        &lt;ul&gt;
-          &lt;li&gt;2200 rpm&lt;/li&gt;
-          &lt;li&gt;3700 rpm&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;구조-1&quot;&gt;구조&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/images/article2/fig1.png&quot; alt=&quot;fig1&quot; /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;특징-1&quot;&gt;특징&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;헤드폰 착용 구조에 대한 실험을 하였다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&quot;실험-결과&quot;&gt;실험 결과&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/images/article2/fig7.png&quot; alt=&quot;fig7&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;당연히 저주파가 잘된다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/article2/fig9.png&quot; alt=&quot;fig9&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;2200 rpm에 대해 적당히 잘된다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/article2/fig8.png&quot; alt=&quot;fig8&quot; /&gt;
-&lt;img src=&quot;/assets/images/article2/fig10.png&quot; alt=&quot;fig10&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Bose꺼랑 비교해놨는데 사실 누가 더 좋은지 모르겠다. y축 스케일이 안맞는데 불편하다. 그리고 800 Hz까지밖에 안그렸는데 그 이상은 무의미한 것 같다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;결론&quot;&gt;결론&lt;/h1&gt;
-&lt;p&gt;현재 나의 실험 상태와 크게 다르지 않은 것 같다. 나는 현재 10가지의 노이즈 데이터를 가지고 실험중인데 위 논문들은 데이터가 너무 부족하다. 그래도 filter tab 길이나 등등 정보를 얻을 수 있었다.&lt;/p&gt;</content><author><name>HanSeokhyeon</name></author><category term="blog" /><summary type="html">프로젝트하면서 유명한 ANC 논문들의 실험 스펙을 정리할 필요가 있어 포스팅하게 되었다.</summary></entry></feed>
+&lt;p&gt;출처 : &lt;a href=&quot;https://franzpark.github.io/git-permanent-authentication/&quot;&gt;https://franzpark.github.io/git-permanent-authentication/&lt;/a&gt;&lt;/p&gt;</content><author><name>HanSeokhyeon</name></author><category term="blog" /><summary type="html">코드를 수정후 github에 push할 때마다 로그인하는 것은 매우 귀찮아서 찾아보았다.</summary></entry></feed>
