@@ -1,14 +1,48 @@
 ---
 layout: post
-title: 리눅스 명령어 cp, rm, mv
+title: 리눅스 명령어 cd, ls, mkdir, cp, rm, mv
 date: 2019-10-30 16:12:00 +0900
 category: blog
 author: HanSeokhyeon
 ---
 
-C를 vim으로 개발하다보니 파일과 디렉토리의 복사, 제거, 이름 변경 명령어를 사용해야할 일이 자주 생겼다.
+리눅스를 쓰다보면 명령어 공부가 자동으로 된다.
 
-# 1. 파일, 디렉토리 복사 cp
+# 1. 현재 위치에 있는 파일과 디렉토리 출력 ls
+```
+~$ ls
+```
+output:
+```
+ANC                                        idea-IU-191.6707.61
+Android                                    myblog
+AndroidStudioProjects                      naver
+```
+와 같이 리스트가 출력된다. 이후 가고 싶은 곳으로 이동하자.
+
+# 2. 현재 위치 이동 cd
+```
+cd [가고자 하는 디렉토리]
+~$ cd ANC
+~/ANC$
+```
+위와 같이 현재 위치가 이동된다.
+
+```
+~/ANC$ cd ..
+~$
+```
+..은 상위 디렉토리를 의미한다.
+
+# 3. 디렉토리 생성 mkdir
+```
+mkdir [디렉토리 이름]
+mkdir filtered-X
+```
+이렇게 하면 디렉토리가 생성된다.
+
+
+# 4. 파일, 디렉토리 복사 cp
 단순하게
 ```
 cp [원래 위치의 파일] [옮길 위치]
@@ -28,7 +62,7 @@ cp -r ~/ANC/v2.3.0_16k ~/CProjects/filtered-X
 ```
 원래 위치 디렉토리가 옮길 위치로 이동된다.
 
-# 2. 파일, 디렉토리 제거
+# 5. 파일, 디렉토리 제거
 ```
 rm [파일 이름]
 rm main.c
@@ -45,7 +79,7 @@ rm -r filtered-X
 ```
 디렉토리 삭제
 
-# 3. 파일, 디렉토리 이름 변경
+# 6. 파일, 디렉토리 이름 변경
 ```
 mv [변경전 이름] [변경할 이름]
 mv filtered-X filtered-X_no_secondary_path
