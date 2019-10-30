@@ -1,6 +1,102 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-30T16:29:49+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Han Seokhyeon</title><subtitle>A blog about technology and stuff related</subtitle><entry><title type="html">리눅스 명령어 cp, rm, mv</title><link href="http://localhost:4000/linux-command/" rel="alternate" type="text/html" title="리눅스 명령어 cp, rm, mv" /><published>2019-10-30T16:12:00+09:00</published><updated>2019-10-30T16:12:00+09:00</updated><id>http://localhost:4000/linux-command</id><content type="html" xml:base="http://localhost:4000/linux-command/">&lt;p&gt;C를 vim으로 개발하다보니 파일과 디렉토리의 복사, 제거, 이름 변경 명령어를 사용해야할 일이 자주 생겼다.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-31T00:27:03+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Han Seokhyeon</title><subtitle>A blog about technology and stuff related</subtitle><entry><title type="html">Python과 Scipy 이용해서 FIR filter 만들기</title><link href="http://localhost:4000/python-fir-filter/" rel="alternate" type="text/html" title="Python과 Scipy 이용해서 FIR filter 만들기" /><published>2019-10-31T00:16:00+09:00</published><updated>2019-10-31T00:16:00+09:00</updated><id>http://localhost:4000/python-fir-filter</id><content type="html" xml:base="http://localhost:4000/python-fir-filter/">&lt;p&gt;Filtered-X LMS 알고리즘을 검증하는 과정에서 추정한 secondary path 대신 내가 임의로 만든 FIR filter를 넣으려고 한다. 그래서 FIR filter를 구현해야할 필요가 있었고 python과 scipy를 이용해 구현하였다. 사실 코드는 전부 참고하고 스펙만 변경하였다.&lt;/p&gt;
 
-&lt;h1 id=&quot;1-파일-디렉토리-복사-cp&quot;&gt;1. 파일, 디렉토리 복사 cp&lt;/h1&gt;
+&lt;h1 id=&quot;1-함수-선언&quot;&gt;1. 함수 선언&lt;/h1&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from pylab import *
+import scipy.signal as signal
+
+#Plot frequency and phase response
+def mfreqz(b,a=1):
+    w,h = signal.freqz(b,a)
+    h_dB = 20 * log10 (abs(h))
+    subplot(211)
+    plot(w/max(w),h_dB)
+    ylim(-150, 5)
+    ylabel('Magnitude (db)')
+    xlabel(r'Normalized Frequency (x$\pi$rad/sample)')
+    title(r'Frequency response')
+    subplot(212)
+    h_Phase = unwrap(arctan2(imag(h),real(h)))
+    plot(w/max(w),h_Phase)
+    ylabel('Phase (radians)')
+    xlabel(r'Normalized Frequency (x$\pi$rad/sample)')
+    title(r'Phase response')
+    subplots_adjust(hspace=0.5)
+
+#Plot step and impulse response
+def impz(b,a=1):
+    l = len(b)
+    impulse = repeat(0.,l); impulse[0] =1.
+    x = arange(0,l)
+    response = signal.lfilter(b,a,impulse)
+    subplot(211)
+    stem(x, response)
+    ylabel('Amplitude')
+    xlabel(r'n (samples)')
+    title(r'Impulse response')
+    subplot(212)
+    step = cumsum(response)
+    stem(x, step)
+    ylabel('Amplitude')
+    xlabel(r'n (samples)')
+    title(r'Step response')
+    subplots_adjust(hspace=0.5)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;생성된 FIR filter의 frequency, phase, impulse, step response를 plot하는 함수이다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;n = 64
+a = signal.firwin(n, cutoff = 0.3, window = &quot;hamming&quot;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;scipy.signal.firwin 함수를 통해 FIR filter를 생성하였다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#Frequency and phase response
+mfreqz(a)
+show()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;output:&lt;br /&gt;
+&lt;img src=&quot;/assets/images/lpf_spec2.png&quot; alt=&quot;lpf_spec2&quot; /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;impz(a)
+show()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;output:&lt;br /&gt;
+&lt;img src=&quot;/assets/images/lpf_spec.png&quot; alt=&quot;lpf_spec&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;그림과 같이 LPF가 잘 생성되었다.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;출처:&lt;br /&gt;
+&lt;a href=&quot;http://mpastell.com/pweave/_downloads/FIR_design_rst.html&quot;&gt;http://mpastell.com/pweave/_downloads/FIR_design_rst.html&lt;/a&gt;&lt;/p&gt;</content><author><name>HanSeokhyeon</name></author><category term="blog" /><summary type="html">Filtered-X LMS 알고리즘을 검증하는 과정에서 추정한 secondary path 대신 내가 임의로 만든 FIR filter를 넣으려고 한다. 그래서 FIR filter를 구현해야할 필요가 있었고 python과 scipy를 이용해 구현하였다. 사실 코드는 전부 참고하고 스펙만 변경하였다.</summary></entry><entry><title type="html">리눅스 명령어 cd, ls, mkdir, cp, rm, mv</title><link href="http://localhost:4000/linux-command/" rel="alternate" type="text/html" title="리눅스 명령어 cd, ls, mkdir, cp, rm, mv" /><published>2019-10-30T16:12:00+09:00</published><updated>2019-10-30T16:12:00+09:00</updated><id>http://localhost:4000/linux-command</id><content type="html" xml:base="http://localhost:4000/linux-command/">&lt;p&gt;리눅스를 쓰다보면 명령어 공부가 자동으로 된다.&lt;/p&gt;
+
+&lt;h1 id=&quot;1-현재-위치에-있는-파일과-디렉토리-출력-ls&quot;&gt;1. 현재 위치에 있는 파일과 디렉토리 출력 ls&lt;/h1&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;~$ ls
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;output:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ANC                                        idea-IU-191.6707.61
+Android                                    myblog
+AndroidStudioProjects                      naver
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;와 같이 리스트가 출력된다. 이후 가고 싶은 곳으로 이동하자.&lt;/p&gt;
+
+&lt;h1 id=&quot;2-현재-위치-이동-cd&quot;&gt;2. 현재 위치 이동 cd&lt;/h1&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cd [가고자 하는 디렉토리]
+~$ cd ANC
+~/ANC$
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;위와 같이 현재 위치가 이동된다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;~/ANC$ cd ..
+~$
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;..은 상위 디렉토리를 의미한다.&lt;/p&gt;
+
+&lt;h1 id=&quot;3-디렉토리-생성-mkdir&quot;&gt;3. 디렉토리 생성 mkdir&lt;/h1&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mkdir [디렉토리 이름]
+mkdir filtered-X
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;이렇게 하면 디렉토리가 생성된다.&lt;/p&gt;
+
+&lt;h1 id=&quot;4-파일-디렉토리-복사-cp&quot;&gt;4. 파일, 디렉토리 복사 cp&lt;/h1&gt;
 &lt;p&gt;단순하게&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cp [원래 위치의 파일] [옮길 위치]
 cp ~/ANC/v2.3.0_16k/main.c ~/CProjects/filtered-X
@@ -17,7 +113,7 @@ cp -r ~/ANC/v2.3.0_16k ~/CProjects/filtered-X
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;원래 위치 디렉토리가 옮길 위치로 이동된다.&lt;/p&gt;
 
-&lt;h1 id=&quot;2-파일-디렉토리-제거&quot;&gt;2. 파일, 디렉토리 제거&lt;/h1&gt;
+&lt;h1 id=&quot;5-파일-디렉토리-제거&quot;&gt;5. 파일, 디렉토리 제거&lt;/h1&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rm [파일 이름]
 rm main.c
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -31,7 +127,7 @@ rm main.c
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;디렉토리 삭제&lt;/p&gt;
 
-&lt;h1 id=&quot;3-파일-디렉토리-이름-변경&quot;&gt;3. 파일, 디렉토리 이름 변경&lt;/h1&gt;
+&lt;h1 id=&quot;6-파일-디렉토리-이름-변경&quot;&gt;6. 파일, 디렉토리 이름 변경&lt;/h1&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mv [변경전 이름] [변경할 이름]
 mv filtered-X filtered-X_no_secondary_path
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -41,7 +137,7 @@ mv filtered-X filtered-X_no_secondary_path
 &lt;p&gt;출처:&lt;br /&gt;
 &lt;a href=&quot;https://webisfree.com/2018-02-05/%EB%A6%AC%EB%88%85%EC%8A%A4%EC%97%90%EC%84%9C-%ED%8C%8C%EC%9D%BC-%ED%8F%B4%EB%8D%94-%EC%9D%B4%EB%A6%84-%EB%B0%94%EA%BE%B8%EB%8A%94-%EB%B0%A9%EB%B2%95&quot;&gt;https://webisfree.com/2018-02-05/%EB%A6%AC%EB%88%85%EC%8A%A4%EC%97%90%EC%84%9C-%ED%8C%8C%EC%9D%BC-%ED%8F%B4%EB%8D%94-%EC%9D%B4%EB%A6%84-%EB%B0%94%EA%BE%B8%EB%8A%94-%EB%B0%A9%EB%B2%95&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;https://www.manualfactory.net/10805&quot;&gt;https://www.manualfactory.net/10805&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://webdir.tistory.com/140&quot;&gt;https://webdir.tistory.com/140&lt;/a&gt;&lt;/p&gt;</content><author><name>HanSeokhyeon</name></author><category term="blog" /><summary type="html">C를 vim으로 개발하다보니 파일과 디렉토리의 복사, 제거, 이름 변경 명령어를 사용해야할 일이 자주 생겼다.</summary></entry><entry><title type="html">gcc 모듈 c 파일 이용해 컴파일하기</title><link href="http://localhost:4000/gcc-module/" rel="alternate" type="text/html" title="gcc 모듈 c 파일 이용해 컴파일하기" /><published>2019-10-30T12:47:00+09:00</published><updated>2019-10-30T12:47:00+09:00</updated><id>http://localhost:4000/gcc-module</id><content type="html" xml:base="http://localhost:4000/gcc-module/">&lt;p&gt;당연히 c 개발을 하면 c파일과 header파일로 파일을 분할해서 관리한다. 그래서 main.c와 모듈이 되는 c파일을 같이 컴파일하는 방법에 대해 알아보았다.&lt;/p&gt;
+&lt;a href=&quot;https://webdir.tistory.com/140&quot;&gt;https://webdir.tistory.com/140&lt;/a&gt;&lt;/p&gt;</content><author><name>HanSeokhyeon</name></author><category term="blog" /><summary type="html">리눅스를 쓰다보면 명령어 공부가 자동으로 된다.</summary></entry><entry><title type="html">gcc 모듈 c 파일 이용해 컴파일하기</title><link href="http://localhost:4000/gcc-module/" rel="alternate" type="text/html" title="gcc 모듈 c 파일 이용해 컴파일하기" /><published>2019-10-30T12:47:00+09:00</published><updated>2019-10-30T12:47:00+09:00</updated><id>http://localhost:4000/gcc-module</id><content type="html" xml:base="http://localhost:4000/gcc-module/">&lt;p&gt;당연히 c 개발을 하면 c파일과 header파일로 파일을 분할해서 관리한다. 그래서 main.c와 모듈이 되는 c파일을 같이 컴파일하는 방법에 대해 알아보았다.&lt;/p&gt;
 
 &lt;h1 id=&quot;1-file-준비&quot;&gt;1. file 준비&lt;/h1&gt;
 &lt;p&gt;현 나의 상황으로는&lt;/p&gt;
@@ -723,24 +819,4 @@ fig.savefig('boeing.png')
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;출처: &lt;a href=&quot;https://m.blog.naver.com/PostView.nhn?blogId=wideeyed&amp;amp;logNo=221137999832&amp;amp;proxyReferer=https%3A%2F%2Fwww.google.com%2F&quot;&gt;https://m.blog.naver.com/PostView.nhn?blogId=wideeyed&amp;amp;logNo=221137999832&amp;amp;proxyReferer=https%3A%2F%2Fwww.google.com%2F&lt;/a&gt;&lt;/p&gt;</content><author><name>HanSeokhyeon</name></author><category term="blog" /><summary type="html">알고리즘 문제를 풀던중 pow(x, y, z)와 같이 3번째 인자를 사용한 경우가 나와서 찾아보게 되었다.</summary></entry><entry><title type="html">마크다운에 링크 삽입하기</title><link href="http://localhost:4000/markdown-link/" rel="alternate" type="text/html" title="마크다운에 링크 삽입하기" /><published>2019-10-17T04:30:17+09:00</published><updated>2019-10-17T04:30:17+09:00</updated><id>http://localhost:4000/markdown-link</id><content type="html" xml:base="http://localhost:4000/markdown-link/">&lt;p&gt;마크다운으로 블로그에 포스팅하다보니 링크를 달아야 할 일이 있어 찾아보았다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;단순-링크-삽입&quot;&gt;단순 링크 삽입&lt;/h1&gt;
-
-&lt;p&gt;구글 : &lt;a href=&quot;http://www.google.com&quot;&gt;http://www.google.com&lt;/a&gt; 와 같은 방식으로 링크를 달고 싶으면&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;http://www.google.com&amp;gt;&lt;/code&gt;
-처럼 &amp;lt;&amp;gt;만 씌어주면 된다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;인라인-주소-삽입&quot;&gt;인라인 주소 삽입&lt;/h1&gt;
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[Google](http://www.google.co.kr)&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.google.co.kr&quot;&gt;Google&lt;/a&gt;로 표시&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;출처: &lt;a href=&quot;https://opentutorials.org/module/782/6083&quot;&gt;https://opentutorials.org/module/782/6083&lt;/a&gt;&lt;/p&gt;</content><author><name>HanSeokhyeon</name></author><category term="blog" /><summary type="html">마크다운으로 블로그에 포스팅하다보니 링크를 달아야 할 일이 있어 찾아보았다.</summary></entry></feed>
+&lt;p&gt;출처: &lt;a href=&quot;https://m.blog.naver.com/PostView.nhn?blogId=wideeyed&amp;amp;logNo=221137999832&amp;amp;proxyReferer=https%3A%2F%2Fwww.google.com%2F&quot;&gt;https://m.blog.naver.com/PostView.nhn?blogId=wideeyed&amp;amp;logNo=221137999832&amp;amp;proxyReferer=https%3A%2F%2Fwww.google.com%2F&lt;/a&gt;&lt;/p&gt;</content><author><name>HanSeokhyeon</name></author><category term="blog" /><summary type="html">알고리즘 문제를 풀던중 pow(x, y, z)와 같이 3번째 인자를 사용한 경우가 나와서 찾아보게 되었다.</summary></entry></feed>
