@@ -1,4 +1,142 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-31T00:27:03+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Han Seokhyeon</title><subtitle>A blog about technology and stuff related</subtitle><entry><title type="html">Python과 Scipy 이용해서 FIR filter 만들기</title><link href="http://localhost:4000/python-fir-filter/" rel="alternate" type="text/html" title="Python과 Scipy 이용해서 FIR filter 만들기" /><published>2019-10-31T00:16:00+09:00</published><updated>2019-10-31T00:16:00+09:00</updated><id>http://localhost:4000/python-fir-filter</id><content type="html" xml:base="http://localhost:4000/python-fir-filter/">&lt;p&gt;Filtered-X LMS 알고리즘을 검증하는 과정에서 추정한 secondary path 대신 내가 임의로 만든 FIR filter를 넣으려고 한다. 그래서 FIR filter를 구현해야할 필요가 있었고 python과 scipy를 이용해 구현하였다. 사실 코드는 전부 참고하고 스펙만 변경하였다.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-31T00:59:41+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Han Seokhyeon</title><subtitle>A blog about technology and stuff related</subtitle><entry><title type="html">gdb 사용해서 C 디버깅하기</title><link href="http://localhost:4000/gdb-tutorial/" rel="alternate" type="text/html" title="gdb 사용해서 C 디버깅하기" /><published>2019-10-31T00:32:00+09:00</published><updated>2019-10-31T00:32:00+09:00</updated><id>http://localhost:4000/gdb-tutorial</id><content type="html" xml:base="http://localhost:4000/gdb-tutorial/">&lt;p&gt;C를 개발하는데 디버깅 안할 수는 없다. 
+vim을 이용해 gcc로 C 개발을 시작했고, 드디어 디버깅이 필요한 시점이 왔다.&lt;/p&gt;
+
+&lt;h1 id=&quot;1-디버깅-시작&quot;&gt;1. 디버깅 시작&lt;/h1&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gdb ./main
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;실행파일을 gdb로 연다.&lt;/p&gt;
+
+&lt;p&gt;output:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;GNU gdb (Ubuntu 8.1-0ubuntu3.1) 8.1.0.20180409-git
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later &amp;lt;http://gnu.org/licenses/gpl.html&amp;gt;
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type &quot;show copying&quot;
+and &quot;show warranty&quot; for details.
+This GDB was configured as &quot;x86_64-linux-gnu&quot;.
+Type &quot;show configuration&quot; for configuration details.
+For bug reporting instructions, please see:
+&amp;lt;http://www.gnu.org/software/gdb/bugs/&amp;gt;.
+Find the GDB manual and other documentation resources online at:
+&amp;lt;http://www.gnu.org/software/gdb/documentation/&amp;gt;.
+For help, type &quot;help&quot;.
+Type &quot;apropos word&quot; to search for commands related to &quot;word&quot;...
+Reading symbols from ./main...done.
+(gdb)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;2-list-명령어&quot;&gt;2. list 명령어&lt;/h1&gt;
+&lt;p&gt;list 명령어는 현재 위치로부터 10줄의 코드를 출력한다.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(gdb) list
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;output:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;2	#include &amp;lt;stdio.h&amp;gt;
+3	#include &amp;lt;stdlib.h&amp;gt;
+4	#include &amp;lt;math.h&amp;gt;
+5	#include &amp;lt;string.h&amp;gt;
+6	
+7	#include &quot;common.h&quot;
+8	#include &quot;synchronizer.h&quot;
+9	#include &quot;secondary_path.h&quot;
+10	#include &quot;anc.h&quot;
+11	#include &quot;functional.h&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;참고로 list 명령어를 입력할 때마다 현재 위치가 이동한다.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(gdb) list
+12	
+13	//function
+14	
+15	int main()
+16	{
+17	
+18		float *secondary_path, *anc_filter;
+19		
+20		if (SECONDARY_PATH) {
+21			////////////////////Estimate secondary path////////////////////
+(gdb) list
+22	
+23			struct FILE_SP file_sp;
+24			file_sp.err_sp = fopen(&quot;out/han/SP/error.csv&quot;, &quot;wt&quot;); // save error of estimating secondary path 
+25			file_sp.f_white = fopen(&quot;data/han/SP/white_noise_11second_16k.raw&quot;, &quot;rb&quot;); // original
+26			file_sp.f_reals = fopen(&quot;data/han/SP/white_16k_100.raw&quot;, &quot;rb&quot;); // recorded by FB mic
+27	
+28			if (USE_S_HAN){
+29				char sp_name[100] = &quot;data/han/filter_tab/lpf64.csv&quot;;
+30				filter_init_file(secondary_path, FILTER_TAB_SP, sp_name);
+31			}
+(gdb)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;3-break-명령어&quot;&gt;3. break 명령어&lt;/h1&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(gdb) b 28
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;output:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Breakpoint 1 at 0xd92: file main.c, line 28.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;위와 같이 입력하면 break가 설정된다.&lt;/p&gt;
+
+&lt;h1 id=&quot;4-run-명령어&quot;&gt;4. run 명령어&lt;/h1&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(gdb) r
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;output:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Starting program: /home/hanseokhyeon/CProjects/filtered-X/main 
+
+Breakpoint 1, main () at main.c:29
+29				char sp_name[100] = &quot;data/han/filter_tab/lpf64.csv&quot;;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;r을 입력하면 break point까지 프로그램이 실행된다.&lt;/p&gt;
+
+&lt;h1 id=&quot;5-step-명령어&quot;&gt;5. step 명령어&lt;/h1&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(gdb) s
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;output:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;30				filter_init_file(secondary_path, FILTER_TAB_SP, sp_name);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;s를 입력하면 한 줄을 실행한다.&lt;/p&gt;
+
+&lt;h1 id=&quot;6-print-명령어&quot;&gt;6. print 명령어&lt;/h1&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(gdb) p sp_name
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;output:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$1 = &quot;data/han/filter_tab/lpf64.csv&quot;, '\000' &amp;lt;repeats 70 times&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;p와 변수명을 입력하면 변수를 출력한다.&lt;/p&gt;
+
+&lt;h1 id=&quot;7-next-명령어&quot;&gt;7. next 명령어&lt;/h1&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(gdb) n
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;output:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Program received signal SIGSEGV, Segmentation fault.
+0x00007ffff76b577d in _IO_vfscanf_internal (s=s@entry=0x5555557598f0, format=&amp;lt;optimized out&amp;gt;, 
+    argptr=argptr@entry=0x7fffffffd450, errp=errp@entry=0x0) at vfscanf.c:2447
+2447	vfscanf.c: 그런 파일이나 디렉터리가 없습니다.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;n을 입력하면 다음 행을 실행한다. 그러면서 에러 발생 지점을 발견하였다. 파일이 없다한다.&lt;/p&gt;
+
+&lt;h1 id=&quot;8-quit-명령어&quot;&gt;8. quit 명령어&lt;/h1&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(gdb) quit
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;종료다.&lt;/p&gt;
+
+&lt;h1 id=&quot;9-display-명령어&quot;&gt;9. display 명령어&lt;/h1&gt;
+&lt;p&gt;차차 공부해보자.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;출처:&lt;br /&gt;
+&lt;a href=&quot;https://jangpd007.tistory.com/54&quot;&gt;https://jangpd007.tistory.com/54&lt;/a&gt;&lt;/p&gt;</content><author><name>HanSeokhyeon</name></author><category term="blog" /><summary type="html">C를 개발하는데 디버깅 안할 수는 없다. vim을 이용해 gcc로 C 개발을 시작했고, 드디어 디버깅이 필요한 시점이 왔다.</summary></entry><entry><title type="html">Python과 Scipy 이용해서 FIR filter 만들기</title><link href="http://localhost:4000/python-fir-filter/" rel="alternate" type="text/html" title="Python과 Scipy 이용해서 FIR filter 만들기" /><published>2019-10-31T00:16:00+09:00</published><updated>2019-10-31T00:16:00+09:00</updated><id>http://localhost:4000/python-fir-filter</id><content type="html" xml:base="http://localhost:4000/python-fir-filter/">&lt;p&gt;Filtered-X LMS 알고리즘을 검증하는 과정에서 추정한 secondary path 대신 내가 임의로 만든 FIR filter를 넣으려고 한다. 그래서 FIR filter를 구현해야할 필요가 있었고 python과 scipy를 이용해 구현하였다. 사실 코드는 전부 참고하고 스펙만 변경하였다.&lt;/p&gt;
 
 &lt;h1 id=&quot;1-함수-선언&quot;&gt;1. 함수 선언&lt;/h1&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from pylab import *
@@ -799,24 +937,4 @@ fig.savefig('boeing.png')
 
 &lt;h3 id=&quot;결과물&quot;&gt;결과물&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/images/boeing.png&quot; alt=&quot;boeing&quot; /&gt;&lt;/p&gt;</content><author><name>HanSeokhyeon</name></author><category term="blog" /><summary type="html">프로젝트에서 파형의 스펙트럼을 그려서 분석할 일이 있어 코드를 작성해보았다.</summary></entry><entry><title type="html">파이썬 pow 함수</title><link href="http://localhost:4000/pow-function/" rel="alternate" type="text/html" title="파이썬 pow 함수" /><published>2019-10-17T05:30:17+09:00</published><updated>2019-10-17T05:30:17+09:00</updated><id>http://localhost:4000/pow-function</id><content type="html" xml:base="http://localhost:4000/pow-function/">&lt;p&gt;알고리즘 문제를 풀던중 pow(x, y, z)와 같이 3번째 인자를 사용한 경우가 나와서 찾아보게 되었다.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; pow(2, 4, 3)
-1
-&amp;gt;&amp;gt;&amp;gt; pow(2, 4) % 3
-1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;파이썬 pow 함수의 3번째 인자는 모듈러연산이다. 아래 예제를 보면 알 수 있듯이 2의 4승인 16을 3으로 나눈 나머지 1이 출력된다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; pow(2, 4)
-16
-&amp;gt;&amp;gt;&amp;gt; 2 ** 4
-16
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;사실 내가 보통 파이썬 코드를 작성중엔 pow 함수보단  ** 연산자를 더 많이 이용한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;출처: &lt;a href=&quot;https://m.blog.naver.com/PostView.nhn?blogId=wideeyed&amp;amp;logNo=221137999832&amp;amp;proxyReferer=https%3A%2F%2Fwww.google.com%2F&quot;&gt;https://m.blog.naver.com/PostView.nhn?blogId=wideeyed&amp;amp;logNo=221137999832&amp;amp;proxyReferer=https%3A%2F%2Fwww.google.com%2F&lt;/a&gt;&lt;/p&gt;</content><author><name>HanSeokhyeon</name></author><category term="blog" /><summary type="html">알고리즘 문제를 풀던중 pow(x, y, z)와 같이 3번째 인자를 사용한 경우가 나와서 찾아보게 되었다.</summary></entry></feed>
+&lt;p&gt;&lt;img src=&quot;/assets/images/boeing.png&quot; alt=&quot;boeing&quot; /&gt;&lt;/p&gt;</content><author><name>HanSeokhyeon</name></author><category term="blog" /><summary type="html">프로젝트에서 파형의 스펙트럼을 그려서 분석할 일이 있어 코드를 작성해보았다.</summary></entry></feed>
