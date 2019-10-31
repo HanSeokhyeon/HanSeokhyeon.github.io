@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-31T00:59:41+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Han Seokhyeon</title><subtitle>A blog about technology and stuff related</subtitle><entry><title type="html">gdb 사용해서 C 디버깅하기</title><link href="http://localhost:4000/gdb-tutorial/" rel="alternate" type="text/html" title="gdb 사용해서 C 디버깅하기" /><published>2019-10-31T00:32:00+09:00</published><updated>2019-10-31T00:32:00+09:00</updated><id>http://localhost:4000/gdb-tutorial</id><content type="html" xml:base="http://localhost:4000/gdb-tutorial/">&lt;p&gt;C를 개발하는데 디버깅 안할 수는 없다. 
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-31T11:57:02+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Han Seokhyeon</title><subtitle>A blog about technology and stuff related</subtitle><entry><title type="html">gdb 사용해서 C 디버깅하기</title><link href="http://localhost:4000/gdb-tutorial/" rel="alternate" type="text/html" title="gdb 사용해서 C 디버깅하기" /><published>2019-10-31T00:32:00+09:00</published><updated>2019-10-31T00:32:00+09:00</updated><id>http://localhost:4000/gdb-tutorial</id><content type="html" xml:base="http://localhost:4000/gdb-tutorial/">&lt;p&gt;C를 개발하는데 디버깅 안할 수는 없다. 
 vim을 이용해 gcc로 C 개발을 시작했고, 드디어 디버깅이 필요한 시점이 왔다.&lt;/p&gt;
 
 &lt;h1 id=&quot;1-디버깅-시작&quot;&gt;1. 디버깅 시작&lt;/h1&gt;
@@ -123,15 +123,25 @@ Breakpoint 1, main () at main.c:29
 2447	vfscanf.c: 그런 파일이나 디렉터리가 없습니다.
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;n을 입력하면 다음 행을 실행한다. 그러면서 에러 발생 지점을 발견하였다. 파일이 없다한다.&lt;/p&gt;
+&lt;p&gt;n을 입력하면 다음 break point까지 실행한다. 그러면서 에러 발생 지점을 발견하였다. 파일이 없다한다.&lt;/p&gt;
 
-&lt;h1 id=&quot;8-quit-명령어&quot;&gt;8. quit 명령어&lt;/h1&gt;
+&lt;h1 id=&quot;8-step-명령어&quot;&gt;8. step 명령어&lt;/h1&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(gdb) s
+30				filter_init_file(secondary_path, FILTER_TAB_SP, sp_name);
+(gdb) s
+filter_init_file (filter=0x200000, size=64, filename=0x7fffffffdc30 &quot;data/han/filter_tab/lpf64.csv&quot;) at functional.c:38
+38		FILE* filter_file = fopen(filename, &quot;rt&quot;);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;s를 입력하면 다음 행을 실행하며, 함수가 있다면 함수 내부까지 접근한다.&lt;/p&gt;
+
+&lt;h1 id=&quot;9-quit-명령어&quot;&gt;9. quit 명령어&lt;/h1&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(gdb) quit
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;종료다.&lt;/p&gt;
 
-&lt;h1 id=&quot;9-display-명령어&quot;&gt;9. display 명령어&lt;/h1&gt;
+&lt;h1 id=&quot;10-display-명령어&quot;&gt;10. display 명령어&lt;/h1&gt;
 &lt;p&gt;차차 공부해보자.&lt;/p&gt;
 
 &lt;hr /&gt;

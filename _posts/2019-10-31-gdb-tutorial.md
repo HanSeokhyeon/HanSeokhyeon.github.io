@@ -146,16 +146,28 @@ Program received signal SIGSEGV, Segmentation fault.
 2447	vfscanf.c: 그런 파일이나 디렉터리가 없습니다.
 ```
 
-n을 입력하면 다음 행을 실행한다. 그러면서 에러 발생 지점을 발견하였다. 파일이 없다한다.
+n을 입력하면 다음 break point까지 실행한다. 그러면서 에러 발생 지점을 발견하였다. 파일이 없다한다.
 
-# 8. quit 명령어
+# 8. step 명령어
+```
+(gdb) s
+30				filter_init_file(secondary_path, FILTER_TAB_SP, sp_name);
+(gdb) s
+filter_init_file (filter=0x200000, size=64, filename=0x7fffffffdc30 "data/han/filter_tab/lpf64.csv") at functional.c:38
+38		FILE* filter_file = fopen(filename, "rt");
+```
+
+s를 입력하면 다음 행을 실행하며, 함수가 있다면 함수 내부까지 접근한다.
+
+
+# 9. quit 명령어
 ```
 (gdb) quit
 ```
 
 종료다.
 
-# 9. display 명령어
+# 10. display 명령어
 차차 공부해보자.
 
 ---
