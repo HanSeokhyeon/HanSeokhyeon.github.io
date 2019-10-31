@@ -146,7 +146,7 @@ Program received signal SIGSEGV, Segmentation fault.
 2447	vfscanf.c: 그런 파일이나 디렉터리가 없습니다.
 ```
 
-n을 입력하면 다음 break point까지 실행한다. 그러면서 에러 발생 지점을 발견하였다. 파일이 없다한다.
+n을 입력하면 다음 행을 실행한다. 그러면서 에러 발생 지점을 발견하였다. 파일이 없다한다.
 
 # 8. step 명령어
 ```

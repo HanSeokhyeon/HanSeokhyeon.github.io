@@ -1,4 +1,34 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-31T11:57:02+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Han Seokhyeon</title><subtitle>A blog about technology and stuff related</subtitle><entry><title type="html">gdb 사용해서 C 디버깅하기</title><link href="http://localhost:4000/gdb-tutorial/" rel="alternate" type="text/html" title="gdb 사용해서 C 디버깅하기" /><published>2019-10-31T00:32:00+09:00</published><updated>2019-10-31T00:32:00+09:00</updated><id>http://localhost:4000/gdb-tutorial</id><content type="html" xml:base="http://localhost:4000/gdb-tutorial/">&lt;p&gt;C를 개발하는데 디버깅 안할 수는 없다. 
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-31T12:52:01+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Han Seokhyeon</title><subtitle>A blog about technology and stuff related</subtitle><entry><title type="html">gdb에서 fopen 함수 디버깅시 step을 사용했을 때 에러</title><link href="http://localhost:4000/gdb-step-error/" rel="alternate" type="text/html" title="gdb에서 fopen 함수 디버깅시 step을 사용했을 때 에러" /><published>2019-10-31T12:50:00+09:00</published><updated>2019-10-31T12:50:00+09:00</updated><id>http://localhost:4000/gdb-step-error</id><content type="html" xml:base="http://localhost:4000/gdb-step-error/">&lt;p&gt;gdb를 이용해 step 명령어를 사용해 디버깅시 fopen에서 파일을 찾을 수 없다며 에러가 나는 것을 확인하였다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Breakpoint 1, main () at main.c:24
+24			file_sp.err_sp = fopen(&quot;out/han/SP/error.csv&quot;, &quot;wt&quot;); // save error of estimating secondary path 
+(gdb) s
+_IO_new_fopen (filename=0x555555556383 &quot;out/han/SP/error.csv&quot;, mode=0x555555556380 &quot;wt&quot;) at iofopen.c:88
+88	iofopen.c: 그런 파일이나 디렉터리가 없습니다.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;찾아보니 step과 next 명령어의 차이점에서 나타나는 문제였는데 영어로는 설명이 이렇다.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;“The step command follows the code into a function call. When stepping, gdb prints each source line before executing it. If you step into a library function, gdb wants to display the source, but those file are not available on the system. The complaint is expected and harmless. If you use the next command instead, it will step over and treat the entire call as a single step.”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;“step 명령어는 코드를 따라 함수 호출로 이어집니다. step 할 때 gdb는 각 소스 라인을 실행하기 전에 인쇄합니다. 라이브러리 함수로 들어가면 gdb가 소스를 표시하려고하지만 해당 파일을 시스템에서 사용할 수 없습니다. 다음 명령을 대신 사용하면 전체 호출이 한 단계 씩 처리됩니다.”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;머 이렇단다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Breakpoint 1, main () at main.c:24
+24			file_sp.err_sp = fopen(&quot;out/han/SP/error.csv&quot;, &quot;wt&quot;); // save error of estimating secondary path 
+(gdb) n
+25			file_sp.f_white = fopen(&quot;data/han/SP/white_noise_11second_16k.raw&quot;, &quot;rb&quot;); // original
+(gdb) 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;s 대신 n을 사용하니 정상적으로 작동한다.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;출처:&lt;br /&gt;
+&lt;a href=&quot;https://stackoverflow.com/questions/25564864/trouble-with-opening-file-for-read-with-fopen/25564973&quot;&gt;https://stackoverflow.com/questions/25564864/trouble-with-opening-file-for-read-with-fopen/25564973&lt;/a&gt;&lt;/p&gt;</content><author><name>HanSeokhyeon</name></author><category term="blog" /><summary type="html">gdb를 이용해 step 명령어를 사용해 디버깅시 fopen에서 파일을 찾을 수 없다며 에러가 나는 것을 확인하였다.</summary></entry><entry><title type="html">gdb 사용해서 C 디버깅하기</title><link href="http://localhost:4000/gdb-tutorial/" rel="alternate" type="text/html" title="gdb 사용해서 C 디버깅하기" /><published>2019-10-31T00:32:00+09:00</published><updated>2019-10-31T00:32:00+09:00</updated><id>http://localhost:4000/gdb-tutorial</id><content type="html" xml:base="http://localhost:4000/gdb-tutorial/">&lt;p&gt;C를 개발하는데 디버깅 안할 수는 없다. 
 vim을 이용해 gcc로 C 개발을 시작했고, 드디어 디버깅이 필요한 시점이 왔다.&lt;/p&gt;
 
 &lt;h1 id=&quot;1-디버깅-시작&quot;&gt;1. 디버깅 시작&lt;/h1&gt;
@@ -123,7 +153,7 @@ Breakpoint 1, main () at main.c:29
 2447	vfscanf.c: 그런 파일이나 디렉터리가 없습니다.
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;n을 입력하면 다음 break point까지 실행한다. 그러면서 에러 발생 지점을 발견하였다. 파일이 없다한다.&lt;/p&gt;
+&lt;p&gt;n을 입력하면 다음 행을 실행한다. 그러면서 에러 발생 지점을 발견하였다. 파일이 없다한다.&lt;/p&gt;
 
 &lt;h1 id=&quot;8-step-명령어&quot;&gt;8. step 명령어&lt;/h1&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;(gdb) s
@@ -876,75 +906,4 @@ vi test.py
 &lt;p&gt;&lt;img src=&quot;/assets/images/testpy.png&quot; alt=&quot;testpy&quot; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;2-docker-run&quot;&gt;2. docker run&lt;/h1&gt;
-&lt;p&gt;```&lt;/p&gt;</content><author><name>HanSeokhyeon</name></author><category term="blog" /><summary type="html">docker를 사용할 때 필요한 데이터는 호스트와 공유해서 사용하는 것이 편리하다. 그러므로 docker의 볼륨 공유 기능을 사용해서 폴더나 파일을 호스트와 컨테이너 간에 공유한다.</summary></entry><entry><title type="html">파이썬에서 librosa 패키지로 스펙트럼 그리기</title><link href="http://localhost:4000/plot-spectrum/" rel="alternate" type="text/html" title="파이썬에서 librosa 패키지로 스펙트럼 그리기" /><published>2019-10-18T16:30:17+09:00</published><updated>2019-10-18T16:30:17+09:00</updated><id>http://localhost:4000/plot-spectrum</id><content type="html" xml:base="http://localhost:4000/plot-spectrum/">&lt;p&gt;프로젝트에서 파형의 스펙트럼을 그려서 분석할 일이 있어 코드를 작성해보았다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;data-load-normalization&quot;&gt;data load, normalization&lt;/h3&gt;
-
-&lt;p&gt;내가 사용한 파일이 raw 파일이라 아래와 같은 방식으로 데이터를 읽었다. 
-librosa 패키지는 함수의 입력으로 -1 ~ 1로 노말라이즈된 데이터를 사용하기 때문에 32767로 나누어주었다.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-angular2&quot;&gt;data = np.fromfile(&quot;ANC_X_8k/boeing_FF.raw&quot;, dtype=np.int16)
-data = data.astype(np.float) / 32767
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;spectrogram-amplitude-db&quot;&gt;spectrogram, amplitude, dB&lt;/h3&gt;
-
-&lt;p&gt;librosa.stft()는 data의 스펙트로그램을 리턴한다. 
-여기서 n_fft로 FFT 사이즈를 설정할 수 있다.
-스펙트로그램은 복소수로 리턴되므로 np.abs를 이용해서 amplitude로 바꿔준다. 
-librosa.amplitude_to_db()를 이용해 스펙트로그램을 dB 스케일로 바꿔준다.
-원칙상으론 데이터의 길이만큼 fft를 하면 됐으나 편의상 스펙트로그램의 평균으로 대체하였다.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-angular2&quot;&gt;data = librosa.stft(data[sample_rate // 4:sample_rate // 4 * 2], n_fft=n_fft)
-data = np.mean(librosa.amplitude_to_db(np.abs(data)), axis=1)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;다음은 pyplot을 이용해 plot하는 과정이므로 전체 코드를 참고하면 된다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;전체-코드&quot;&gt;전체 코드&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-angular2&quot;&gt;import numpy as np
-import librosa
-import matplotlib.pyplot as plt
-
-
-sample_rate = 8000
-n_fft = 512
-
-data = np.fromfile(&quot;ANC_X_8k/boeing_FF.raw&quot;, dtype=np.int16)
-data = data.astype(np.float) / 32767
-data = librosa.stft(data[sample_rate // 4:sample_rate // 4 * 2], n_fft=n_fft)
-data = np.mean(librosa.amplitude_to_db(np.abs(data)), axis=1)
-
-plt.title('boeing')
-
-plt.xlabel(&quot;Frequency[Hz]&quot;)
-plt.xticks(range(0, n_fft//2+1, 32), np.arange(0, 4001, 500))
-plt.xlim(0, n_fft//2)
-
-plt.ylabel(&quot;Amplitude[dB]&quot;)
-
-plt.plot(data, label='data', alpha=0.7)
-
-plt.grid()
-plt.legend()
-
-fig = plt.gcf()
-
-plt.show()
-fig.savefig('boeing.png')
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;결과물&quot;&gt;결과물&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/boeing.png&quot; alt=&quot;boeing&quot; /&gt;&lt;/p&gt;</content><author><name>HanSeokhyeon</name></author><category term="blog" /><summary type="html">프로젝트에서 파형의 스펙트럼을 그려서 분석할 일이 있어 코드를 작성해보았다.</summary></entry></feed>
+&lt;p&gt;```&lt;/p&gt;</content><author><name>HanSeokhyeon</name></author><category term="blog" /><summary type="html">docker를 사용할 때 필요한 데이터는 호스트와 공유해서 사용하는 것이 편리하다. 그러므로 docker의 볼륨 공유 기능을 사용해서 폴더나 파일을 호스트와 컨테이너 간에 공유한다.</summary></entry></feed>
