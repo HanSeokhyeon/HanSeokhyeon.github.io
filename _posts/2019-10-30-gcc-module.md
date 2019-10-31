@@ -67,6 +67,10 @@ collect2: error: ld returned 1 exit status
 다시 제대로
 ```
 gcc -o main -g main.c synchronizer.c anc.c functional.c secondary_path.c -lm
+
+or
+
+gcc -o main -g *.c -lm
 ```
 하니 머 warning이 이것저것 뜨나 별거아니므로 무시했다. 여튼 실행파일이 만들어졌다.
 
