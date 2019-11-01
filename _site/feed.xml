@@ -1,4 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-10-31T12:52:01+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Han Seokhyeon</title><subtitle>A blog about technology and stuff related</subtitle><entry><title type="html">gdb에서 fopen 함수 디버깅시 step을 사용했을 때 에러</title><link href="http://localhost:4000/gdb-step-error/" rel="alternate" type="text/html" title="gdb에서 fopen 함수 디버깅시 step을 사용했을 때 에러" /><published>2019-10-31T12:50:00+09:00</published><updated>2019-10-31T12:50:00+09:00</updated><id>http://localhost:4000/gdb-step-error</id><content type="html" xml:base="http://localhost:4000/gdb-step-error/">&lt;p&gt;gdb를 이용해 step 명령어를 사용해 디버깅시 fopen에서 파일을 찾을 수 없다며 에러가 나는 것을 확인하였다.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-11-01T11:51:52+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Han Seokhyeon</title><subtitle>A blog about technology and stuff related</subtitle><entry><title type="html">Pycharm SSH Terminal 연결하기</title><link href="http://localhost:4000/pycharm-ssh-terminal/" rel="alternate" type="text/html" title="Pycharm SSH Terminal 연결하기" /><published>2019-11-01T11:31:00+09:00</published><updated>2019-11-01T11:31:00+09:00</updated><id>http://localhost:4000/pycharm-ssh-terminal</id><content type="html" xml:base="http://localhost:4000/pycharm-ssh-terminal/">&lt;p&gt;연구실의 데스크탑을 서버로 사용하고 개인 노트북을 로컬로 사용하려고 시도하고 있다. SSH server로 데스크탑 우분투로 접속하는 것을 성공했지만, 좀 더 편한 이용을 위해 PyCharm Professional에서 지원하는 SSH plugin을 사용해보고자 한다. 참고로 PyCharm Professional은 유료버전이나 학생인증을 하면 무료로 사용할 수 있다.&lt;/p&gt;
+
+&lt;h1 id=&quot;1-ssh-server-접속-환경-구축&quot;&gt;1. SSH server 접속 환경 구축&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://hanseokhyeon.github.io/ssh-server/&quot;&gt;여기&lt;/a&gt;를 참고하길 바란다.&lt;/p&gt;
+
+&lt;h1 id=&quot;2-pycharm-ssh-remote-run-plugin-설치&quot;&gt;2. Pycharm SSH Remote Run plugin 설치&lt;/h1&gt;
+
+&lt;p&gt;SSH Remote Run은 bundle plugin이므로 기본적으로 설치 되어 있을 것이다.&lt;/p&gt;
+
+&lt;p&gt;Settings/Plugins에 installed를 눌러서 설치가 되어 있는지 확인하자.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/ssh_remote_run.png&quot; alt=&quot;ssh_remote_run&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;3-ssh-terminal-연결&quot;&gt;3. SSH terminal 연결&lt;/h1&gt;
+
+&lt;p&gt;메인메뉴에 Tools/Start SSH Session을 누르면 정보를 입력하는 창이 뜬다. 평소에 터미널로 SSH server에 접속하듯이 호스트, 사용자, 포트번호, 비밀번호를 입력하면 터미널이 연결된다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/ssh_session.png&quot; alt=&quot;ssh_session&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이와 같이 입력하면&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/terminal.png&quot; alt=&quot;terminal&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;연결된다.&lt;/p&gt;</content><author><name>HanSeokhyeon</name></author><category term="blog" /><summary type="html">연구실의 데스크탑을 서버로 사용하고 개인 노트북을 로컬로 사용하려고 시도하고 있다. SSH server로 데스크탑 우분투로 접속하는 것을 성공했지만, 좀 더 편한 이용을 위해 PyCharm Professional에서 지원하는 SSH plugin을 사용해보고자 한다. 참고로 PyCharm Professional은 유료버전이나 학생인증을 하면 무료로 사용할 수 있다.</summary></entry><entry><title type="html">gdb에서 fopen 함수 디버깅시 step을 사용했을 때 에러</title><link href="http://localhost:4000/gdb-step-error/" rel="alternate" type="text/html" title="gdb에서 fopen 함수 디버깅시 step을 사용했을 때 에러" /><published>2019-10-31T12:50:00+09:00</published><updated>2019-10-31T12:50:00+09:00</updated><id>http://localhost:4000/gdb-step-error</id><content type="html" xml:base="http://localhost:4000/gdb-step-error/">&lt;p&gt;gdb를 이용해 step 명령어를 사용해 디버깅시 fopen에서 파일을 찾을 수 없다며 에러가 나는 것을 확인하였다.&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Breakpoint 1, main () at main.c:24
 24			file_sp.err_sp = fopen(&quot;out/han/SP/error.csv&quot;, &quot;wt&quot;); // save error of estimating secondary path 
@@ -373,6 +397,10 @@ collect2: error: ld returned 1 exit status
 
 &lt;p&gt;다시 제대로&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gcc -o main -g main.c synchronizer.c anc.c functional.c secondary_path.c -lm
+
+or
+
+gcc -o main -g *.c -lm
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;하니 머 warning이 이것저것 뜨나 별거아니므로 무시했다. 여튼 실행파일이 만들어졌다.&lt;/p&gt;
 
@@ -895,15 +923,4 @@ tensorflow/tensorflow   &amp;lt;none&amp;gt;              d64a95598d6c        2 
 &lt;a href=&quot;https://www.tensorflow.org/tutorials/quickstart/beginner&quot;&gt;https://www.tensorflow.org/tutorials/quickstart/beginner&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;https://pbj0812.tistory.com/134&quot;&gt;https://pbj0812.tistory.com/134&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;https://subicura.com/2017/01/19/docker-guide-for-beginners-2.html&quot;&gt;https://subicura.com/2017/01/19/docker-guide-for-beginners-2.html&lt;/a&gt;
-&lt;a href=&quot;https://nicewoong.github.io/development/2018/03/06/docker-commit-container/&quot;&gt;https://nicewoong.github.io/development/2018/03/06/docker-commit-container/&lt;/a&gt;&lt;/p&gt;</content><author><name>HanSeokhyeon</name></author><category term="blog" /><summary type="html">로컬이 아닌 공동으로 사용하는 서버에서 딥러닝을 해야할 경우 버젼 충돌 문제가 발생하게 된다. 내가 사용하는 TF나 PyTorch 버젼이 다른 사람과 다르다면 docker를 사용하여 환경을 구축하는 것을 추천한다.</summary></entry><entry><title type="html">docker 볼륨 공유</title><link href="http://localhost:4000/docker-share-volume/" rel="alternate" type="text/html" title="docker 볼륨 공유" /><published>2019-10-22T01:30:17+09:00</published><updated>2019-10-22T01:30:17+09:00</updated><id>http://localhost:4000/docker-share-volume</id><content type="html" xml:base="http://localhost:4000/docker-share-volume/">&lt;p&gt;docker를 사용할 때 필요한 데이터는 호스트와 공유해서 사용하는 것이 편리하다. 그러므로 docker의 볼륨 공유 기능을 사용해서 폴더나 파일을 호스트와 컨테이너 간에 공유한다.&lt;/p&gt;
-
-&lt;h1 id=&quot;1-공유할-폴더와-파일-생성&quot;&gt;1. 공유할 폴더와 파일 생성&lt;/h1&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mkdir docker_share
-cd docker_share
-vi test.py
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&quot;/assets/images/testpy.png&quot; alt=&quot;testpy&quot; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&quot;2-docker-run&quot;&gt;2. docker run&lt;/h1&gt;
-&lt;p&gt;```&lt;/p&gt;</content><author><name>HanSeokhyeon</name></author><category term="blog" /><summary type="html">docker를 사용할 때 필요한 데이터는 호스트와 공유해서 사용하는 것이 편리하다. 그러므로 docker의 볼륨 공유 기능을 사용해서 폴더나 파일을 호스트와 컨테이너 간에 공유한다.</summary></entry></feed>
+&lt;a href=&quot;https://nicewoong.github.io/development/2018/03/06/docker-commit-container/&quot;&gt;https://nicewoong.github.io/development/2018/03/06/docker-commit-container/&lt;/a&gt;&lt;/p&gt;</content><author><name>HanSeokhyeon</name></author><category term="blog" /><summary type="html">로컬이 아닌 공동으로 사용하는 서버에서 딥러닝을 해야할 경우 버젼 충돌 문제가 발생하게 된다. 내가 사용하는 TF나 PyTorch 버젼이 다른 사람과 다르다면 docker를 사용하여 환경을 구축하는 것을 추천한다.</summary></entry></feed>
