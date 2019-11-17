@@ -35,3 +35,33 @@ epoch 16 loss 0.6999 acc 0.8108
 epoch 18 loss 0.5953 acc 0.8198
 epoch 8 loss 0.7030 acc 0.7568
 epoch 11 loss 0.6641 acc 0.8288
+
+# 5. resnetRNN, layer = [5, 4, 4], filters = [64, 128, 256]
+epoch 4 loss 0.7461 acc 0.7568  
+epoch 9 loss 0.9223 acc 0.6937  
+
+# 6. resnetRNN, layer = [3, 2, 2], filters = [64, 128, 256]
+epoch 4 loss 0.9112 acc 0.7027  
+epoch 7 loss 0.7967 acc 0.7117  
+
+# 7. resnetRNN, layer = [7, 6, 6], filters = [64, 128, 256]
+epoch 13 loss 1.5899 acc 0.6757  
+epoch 9 loss 0.9989 acc 0.7027  
+
+# 8. resnetRNN, layer = [9, 8, 8], filters = [64, 128, 256]
+epoch 18 loss 1.2800 acc 0.6667  
+epoch 4 loss 1.0925 acc 0.5856  
+
+# 9. resnetRNN, layer = [3, 4, 4], filters = [64, 128, 256]
+epoch 14 loss 0.9747 acc 0.6757  
+epoch 14 loss 0.8728 acc 0.7748  
+epoch 10 loss 0.8545 acc 0.7297
+epoch 5 loss 0.8566 acc 0.6847
+
+# 10. resnetRNN, layer = [3, 4, 4], filters = [64, 128, 256], non_initialization
+epoch 14 loss 0.8709 acc 0.7658  
+epoch 9 loss 0.9039 acc 0.7568
+
+# 11. resnetRNN, layer = [5, 4, 4], filters = [64, 128, 256], non_initialization
+epoch 14 loss 0.9539 acc 0.7658  
+epoch 13 loss 0.9006 acc 0.7748  
