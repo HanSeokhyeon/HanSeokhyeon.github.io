@@ -14,7 +14,7 @@ epoch 41 loss 0.6767 acc 0.8198
 epoch 15 loss 0.5758 acc 0.8378  
 epoch 37 loss 0.6570 acc 0.8108  
 
-![2019-11-08_50_33](/assets/images/2019-11-08_50_33.png)
+![2019-11-08-50-33](/assets/images/2019-11-08 13_50_33.png)
 
 # 2. CRNN, layer = [2, 3, 3], filters = [64, 128, 256]
 epoch 10 loss 0.8609 acc 0.7297  
@@ -22,7 +22,7 @@ epoch 7 loss 0.6213 acc 0.7838
 epoch 41 loss 0.8283 acc 0.8378  
 epoch 35 loss 0.6847 acc 0.8468  
 
-![2019-11-08_16:58:47](/assets/images/2019-11-08_16:58:47.png)
+![2019-11-08-16:58:47](/assets/images/2019-11-08 16:58:47.png)
 
 # 3. CRNN, layer = [3, 3, 3], filters = [64, 128, 256]
 epoch 28 loss 0.6859 acc 0.8198  
