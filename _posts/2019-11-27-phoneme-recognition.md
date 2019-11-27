@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Phoneme recognition (Spikegram, MFCC, Spectrogram)
+title: Phoneme recognition (Spikegram, MFCC, Spectrogram, Melspectrogram)
 date: 2019-11-27 15:30:00 +0900
 category: blog
 author: HanSeokhyeon
