@@ -75,3 +75,26 @@ Total : 0.6496
 ```
 
 ![120_spectrogram](/assets/images/120_spectrogram.png)
+
+# 4. Melspectrogram
+
+```
+Obstruent - Stops : 0.4918
+Obstruent - Affricate : 0.3574
+Obstruent - Fricative : 0.6723
+Sonorant - Glides : 0.5543
+Sonorant - Nasals : 0.6009
+Sonorant - Vowels : 0.5370
+Others : 0.9194
+
+Obstruent : 0.6106
+Sonorant : 0.5475
+Others : 0.9194
+
+Non-mute : 0.5661
+Mute : 0.9194
+
+Total : 0.6537
+```
+
+![120_melspectrogram](/assets/images/120_melspectrogram.png)
