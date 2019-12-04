@@ -98,3 +98,4 @@ Epoch 8 (Test) Loss 0.7558 Acc 0.8037
 
 # 18. googlenetRNN, module = [1, 2, 1], filters = [64, 128, 128]
 Epoch 5 (Test) Loss 0.8984 Acc 0.7196
+Epoch 17 (Test) Loss 0.7758 Acc 0.8037
