@@ -99,3 +99,17 @@ Epoch 8 (Test) Loss 0.7558 Acc 0.8037
 # 18. googlenetRNN, module = [1, 2, 1], filters = [64, 128, 128]
 Epoch 5 (Test) Loss 0.8984 Acc 0.7196
 Epoch 17 (Test) Loss 0.7758 Acc 0.8037
+Epoch 7 (Test) Loss 1.0300 Acc 0.7196
+Epoch 11 (Test) Loss 0.8914 Acc 0.6916
+
+# 19. googlenetRNN, module = [1, 1, 1, 1], filters = [64, 128, 128], maxpooling * 3
+Epoch 9 (Test) Loss 0.8737 Acc 0.7944
+Epoch 8 (Test) Loss 0.6057 Acc 0.7757
+Epoch 10 (Test) Loss 0.8225 Acc 0.7570
+Epoch 4 (Test) Loss 0.9024 Acc 0.7664
+
+# 20. googlenetRNN, module = [1, 2, 1, 1], filters = [64, 128, 128], maxpooling * 3
+Epoch 11 (Test) Loss 0.8609 Acc 0.7383
+Epoch 20 (Test) Loss 0.9937 Acc 0.7944
+Epoch 4 (Test) Loss 0.8394 Acc 0.7103
+Epoch 11 (Test) Loss 0.7857 Acc 0.7477
