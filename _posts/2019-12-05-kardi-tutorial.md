@@ -331,8 +331,94 @@ cd /opt/models
 
 sudo wget https://phon.ioc.ee/~tanela/tedlium_nnet_ms_sp_online.tgz
 sudo tar -zxvf tedlium_nnet_ms_sp_online.tgz
+```
+DB가 1.4GB라 다운받는데 시간이 꽤 걸린다.
 
+```
 sudo wget https://raw.githubusercontent.com/alumae/kaldi-gstreamer-server/master/sample_english_nnet2.yaml
 sudo find /opt/models/ -type f | sudo xargs sed -i 's:test:/opt:g'
 sudo xargs sed -i 's:full-post-processor:#full-post-processor:g' /opt/models/sample_english_nnet2.yaml
+```
+sed 명령어는 어떠한 문자열을 원하는 문자열로 바꾸는데 주로 쓰인다. `sudo find ...` 명령어는 파일 안에서 모든 test를 /opt로 바꾼다. 우리의 models 디렉토리의 경로가 /opt이기 때문이다.
+
+```
+sudo cat ./sample_english_nnet2.yaml
+```
+로 확인해보면
+
+```
+# You have to download TEDLIUM "online nnet2" models in order to use this sample
+# Run download-tedlium-nnet2.sh in '/opt/models' to download them.
+use-nnet2: True
+decoder:
+    # All the properties nested here correspond to the kaldinnet2onlinedecoder GStreamer plugin properties.
+    # Use gst-inspect-1.0 ./libgstkaldionline2.so kaldinnet2onlinedecoder to discover the available properties
+    use-threaded-decoder:  true
+    model : /opt/models/english/tedlium_nnet_ms_sp_online/final.mdl
+    word-syms : /opt/models/english/tedlium_nnet_ms_sp_online/words.txt
+    fst : /opt/models/english/tedlium_nnet_ms_sp_online/HCLG.fst
+    mfcc-config : /opt/models/english/tedlium_nnet_ms_sp_online/conf/mfcc.conf
+    ivector-extraction-config : /opt/models/english/tedlium_nnet_ms_sp_online/conf/ivector_extractor.conf
+    max-active: 10000
+    beam: 10.0
+    lattice-beam: 6.0
+    acoustic-scale: 0.083
+    do-endpointing : true
+    endpoint-silence-phones : "1:2:3:4:5:6:7:8:9:10"
+    traceback-period-in-secs: 0.25
+    chunk-length-in-secs: 0.25
+    num-nbest: 1
+    #Additional functionality that you can play with:
+    #lm-fst:  /opt/models/english/tedlium_nnet_ms_sp_online/G.fst
+    #big-lm-const-arpa: /opt/models/english/tedlium_nnet_ms_sp_online/G.carpa
+    #phone-syms: /opt/models/english/tedlium_nnet_ms_sp_online/phones.txt
+    #word-boundary-file: /opt/models/english/tedlium_nnet_ms_sp_online/word_boundary.int
+    #do-phone-alignment: true
+out-dir: tmp
+
+use-vad: False
+silence-timeout: 10
+
+# Just a sample post-processor that appends "." to the hypothesis
+post-processor: perl -npe 'BEGIN {use IO::Handle; STDOUT->autoflush(1);} sleep(1); s/(.*)/\1./;'
+
+#post-processor: (while read LINE; do echo $LINE; done)
+
+# A sample full post processor that add a confidence score to 1-best hyp and deletes other n-best hyps
+##full-post-processor: ./sample_full_post_processor.py
+
+logging:
+    version : 1
+    disable_existing_loggers: False
+    formatters:
+        simpleFormater:
+            format: '%(asctime)s - %(levelname)7s: %(name)10s: %(message)s'
+            datefmt: '%Y-%m-%d %H:%M:%S'
+    handlers:
+        console:
+            class: logging.StreamHandler
+            formatter: simpleFormater
+            level: DEBUG
+    root:
+        level: DEBUG
+        handlers: [console]
+```
+
+경로가 /opt/models로 바껴있는 것을 확인할 수 있다.
+
+# 11. Test
+
+```
+cd /opt/docker-kaldi-gstreamer-server
+
+sh start.sh -y /opt/models/sample_english_nnet2.yaml
+```
+Start!!
+
+```
+wget https://raw.githubusercontent.com/alumae/kaldi-gstreamer-server/master/kaldigstserver/client.py -P /tmp
+wget https://raw.githubusercontent.com/jcsilva/docker-kaldi-gstreamer-server/master/audio/1272-128104-000.wav -P /tmp
+wget https://raw.githubusercontent.com/alumae/kaldi-gstreamer-server/master/test/data/bill_gates-TED.mp3 -P /tmp
+python /tmp/client.py -u ws://localhost:8080/client/ws/speech -r 32000 /tmp/1272-128104-0000.wav
+python /tmp/client.py -u ws://locallhost:8080/client/ws/speech -r 8192 /tmp/bill_gates-TED.mp3
 ```
