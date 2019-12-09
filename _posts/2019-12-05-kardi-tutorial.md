@@ -84,7 +84,7 @@ sudo ln -s /usr/bin/g++-7 /usr/local/cuda/bin/g++
 
 위와 같이 설치후 심볼릭 링크를 걸어준다.
 
-# 3. Setting
+# 3. Jansson 설치
 
 /opt로 이동 (관리자 권한이 계속 필요하다..)
 ```
@@ -133,7 +133,7 @@ sudo rm /opt/jansson-2.7.tar.bz2
 sudo rm -rf /opt/jansson-2.7
 ```
 
-github에서 kaldi 가져오기
+# 4. Github에서 kaldi 가져오기
 
 ```
 cd /opt
@@ -151,6 +151,8 @@ remote: Total 104130 (delta 0), reused 1 (delta 0), pack-reused 104122
 오브젝트를 받는 중: 100% (104130/104130), 114.17 MiB | 10.18 MiB/s, 완료.
 델타를 알아내는 중: 100% (80381/80381), 완료.
 ```
+
+# 5. Kaldi tools 컴파일
 
 kaldi tools를 컴파일하러 가자.
 ```
@@ -257,6 +259,8 @@ sudo make
 ```
 그러나 저 Warning은 안사라졌다... 넘어가보자...
 
+# 6. Kaldi src 컴파일
+
 ```
 cd /opt/kaldi/src
 
@@ -271,14 +275,64 @@ Kaldi has been successfully configured. To compile:
 성공적으로 configured하였다.
 
 ```
-sudo sed -i '/-g # -O0 -DKALDI_PARANOID/c\-03 -DNDEBUG' kaldi.mk
 sudo make depend
 sudo make
 ```
-무리없이 된 거 같다.
+무리없이 된 거 같다. 30분은 걸린 거 같다..
 
+```
 cd /opt/kaldi/src/online
 sudo make depend
 sudo make
 ```
 
+이것도 마지막으로 완료.
+
+# 7. gst-plugin 컴파일
+
+```
+cd /opt/kaldi/src/gst-plugin
+sudo make depend
+sudo make
+```
+
+# 8. gst-kaldi-nnet2-online 컴파일
+
+```
+cd /opt
+sudo git clone https://github.com/alumae/gst-kaldi-nnet2-online.git
+
+cd /opt/gst-kaldi-nnet2-online/src
+sudo sed -i '/KALDI_ROOT?=\/home\/tanel\/tools\/kaldi-trunk/c\KALDI_ROOT?=\/opt\/kaldi' Makefile
+sudo make depend
+sudo make
+```
+
+# 9. kaldi-gstreamer-server clone
+
+```
+cd /opt
+sudo git clone https://github.com/alumae/kaldi-gstreamer-server.git
+sudo git clone https://github.com/jcsilva/docker-kaldi-gstreamer-server.git
+
+cd docker-kaldi-gstreamer-server
+
+sudo chmod +x start.sh
+sudo chmod +x stop.sh
+```
+후 설치는 다 끝났다.
+
+
+# 10. DB 다운로드
+
+```
+sudo mkdir /opt/models
+cd /opt/models
+
+sudo wget https://phon.ioc.ee/~tanela/tedlium_nnet_ms_sp_online.tgz
+sudo tar -zxvf tedlium_nnet_ms_sp_online.tgz
+
+sudo wget https://raw.githubusercontent.com/alumae/kaldi-gstreamer-server/master/sample_english_nnet2.yaml
+sudo find /opt/models/ -type f | sudo xargs sed -i 's:test:/opt:g'
+sudo xargs sed -i 's:full-post-processor:#full-post-processor:g' /opt/models/sample_english_nnet2.yaml
+```
