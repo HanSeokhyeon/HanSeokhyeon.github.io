@@ -84,5 +84,201 @@ sudo ln -s /usr/bin/g++-7 /usr/local/cuda/bin/g++
 
 위와 같이 설치후 심볼릭 링크를 걸어준다.
 
+# 3. Setting
 
+/opt로 이동 (관리자 권한이 계속 필요하다..)
+```
+cd /opt
+```
+
+jansson 설치 후 압축풀기
+```
+sudo wget http://www.digip.org/jansson/releases/jansson-2.7.tar.bz2
+sudo bunzip2 -c jansson-2.7.tar.bz2 | sudo tar xf -
+```
+
+압축 푼 jansson-2.7로 가서 make, check, install
+```
+cd jansson-2.7
+
+sudo ./configure
+sudo make
+sudo make check
+sudo make install
+```
+머 이리저리 엄청 뜨는데 make check에서 PASS: 1로 뜨긴했다.
+
+output:
+```
+...
+============================================================================
+Testsuite summary for jansson 2.7
+============================================================================
+# TOTAL: 1
+# PASS:  1
+# SKIP:  0
+# XFAIL: 0
+# FAIL:  0
+# XPASS: 0
+# ERROR: 0
+============================================================================
+...
+```
+
+주소를 파일에 입력
+```
+sudo echo "/usr/local/lib" >> sudo /etc/ld.so.conf.d/jansson.conf
+sudo ldconfig
+sudo rm /opt/jansson-2.7.tar.bz2
+sudo rm -rf /opt/jansson-2.7
+```
+
+github에서 kaldi 가져오기
+
+```
+cd /opt
+
+sudo git clone https://github.com/kaldi-asr/kaldi.git
+```
+
+output:
+```
+'kaldi'에 복제합니다...
+remote: Enumerating objects: 8, done.
+remote: Counting objects: 100% (8/8), done.
+remote: Compressing objects: 100% (8/8), done.
+remote: Total 104130 (delta 0), reused 1 (delta 0), pack-reused 104122
+오브젝트를 받는 중: 100% (104130/104130), 114.17 MiB | 10.18 MiB/s, 완료.
+델타를 알아내는 중: 100% (80381/80381), 완료.
+```
+
+kaldi tools를 컴파일하러 가자.
+```
+cd /opt/kaldi/tools
+sudo make
+```
+output:
+```
+extras/check_dependencies.sh
+extras/check_dependencies.sh: gfortran is not installed.
+extras/check_dependencies.sh: Intel MKL is not installed. Run extras/install_mkl.sh to install it.
+ ... You can also use other matrix algebra libraries. For information, see:
+ ...   http://kaldi-asr.org/doc/matrixwrap.html
+extras/check_dependencies.sh: Some prerequisites are missing; install them using the command:
+  sudo apt-get install gfortran
+Makefile:38: recipe for target 'check_required_programs' failed
+make: *** [check_required_programs] Error 1
+```
+한번에 되면 섭하다. 에러를 읽어보니 gfortran이랑 Intel MKL이 설치가 안되있다고 한다.
+
+```
+sudo apt-get install gfortran
+```
+으로 gfortran을 설치해줬다. 다시 `sudo make`를 실행하니 여전히 Intel MKL이 설치되어 있지 않다고 뜬다. 그런데 컴파일은 시작되었고 보기 무섭게 빠르게 log가 빨리 올라간다... Intel MKL을 설치하고 다시 컴파일 해봐야겠다...
+
+```
+sh extras/install_mkl.sh
+```
+output:
+```
+E: The repository 'http://ppa.launchpad.net/george-edison55/cmake-3.x/ubuntu bionic Release' does not have a Release file.
+N: Updating from such a repository can't be done securely, and is therefore disabled by default.
+N: See apt-secure(8) manpage for repository creation and user configuration details.
+extras/install_mkl.sh: MKL package intel-mkl-64bit-2019.2-057 installation FAILED.
+```
+설치 실패란다... 뭐가 문제일까... gfortran이랑 mkl을 둘다 설치하고 컴파일 했어야했는데... 우선 컴파일이 엄청 되긴 했으니 그냥 넘어가본다...(error1)
+
+
+```
+sudo ./install_portaudio.sh
+```
+위 명령어를 실행하니 설치가 엄청되었다.
+
+
+```
+cd /opt/kaldi/src
+
+sudo ./configure --shared
+```
+output:
+```
+Configuring KALDI to use MKL.
+Checking compiler g++ ...
+Checking OpenFst library in /opt/kaldi/tools/openfst-1.6.7 ...
+Checking cub library in /opt/kaldi/tools/cub-1.8.0 ...
+Doing OS specific configurations ...
+On Linux: Checking for linear algebra header files ...
+Configuring MKL library directory: ***configure failed: MKL libraries could not be found. Please use the switch --mkl-libdir or try another math library, e.g. --mathlib=ATLAS (would be slower) ***
+```
+MKL libraries를 찾을 수 없다... 
+
+하지만 갓글, [갓허브](https://github.com/kaldi-asr/kaldi/issues/3628#issuecomment-538070238)는 해결해주었다.  
+<https://github.com/kaldi-asr/kaldi/issues/3628#issuecomment-538070238>
+
+이 글대로 하고나서 다시 `sudo sh install_mkl.sh` 하니깐
+output:
+```
+extras/install_mkl.sh: MKL version 2019.0.1 is already installed.
+...
+```
+이미 설치되어 있단다!!
+
+다시 make...
+```
+sudo make
+```
+output:
+```
+extras/check_dependencies.sh
+extras/check_dependencies.sh: all OK.
+...
+Warning: IRSTLM is not installed by default anymore. If you need IRSTLM
+Warning: use the script extras/install_irstlm.sh
+All done OK.
+```
+후... all OK.는 훼이크고 IRSTLM?설치하러 가자.
+
+```
+sudo sh extras/install_irstlm.sh
+```
+output:
+```
+...
+***() Installation of IRSTLM finished successfully
+***() Please source the tools/extras/env.sh in your path.sh to enable it
+```
+
+tools/extras/env.sh를 source해서 너의 path.sh에 IRSTLM을 가능하게 하라.라고 해서 실행했는데 env.sh는 extras가 아니라 tools안에 있다... 다시 실행하니 된다. ㅎㅎ
+
+머 이제 진짜 make를 해보자...ㅎㅎ 
+
+```
+sudo make
+```
+그러나 저 Warning은 안사라졌다... 넘어가보자...
+
+```
+cd /opt/kaldi/src
+
+sudo ./configure --shared
+```
+output:
+```
+Kaldi has been successfully configured. To compile:
+
+  make -j clean depend; make -j <NCPU>
+```
+성공적으로 configured하였다.
+
+```
+sudo sed -i '/-g # -O0 -DKALDI_PARANOID/c\-03 -DNDEBUG' kaldi.mk
+sudo make depend
+sudo make
+```
+무리없이 된 거 같다.
+
+cd /opt/kaldi/src/online
+sudo make depend
+sudo make
+```
 
