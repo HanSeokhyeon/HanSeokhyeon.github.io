@@ -217,6 +217,26 @@ MKL libraries를 찾을 수 없다...
 하지만 갓글, [갓허브](https://github.com/kaldi-asr/kaldi/issues/3628#issuecomment-538070238)는 해결해주었다.  
 <https://github.com/kaldi-asr/kaldi/issues/3628#issuecomment-538070238>
 
+---
+## 추가 - openfst-1.6.7 설치시 오류
+
+나는 위에 output을 보면 알 수 있듯이 정상적으로 openfst-1.6.7이 설치되었다. 하지만 정상적으로 설치되지 않을 수도 있다. 그때 해결할 수 있는 방안을 제시한다.
+
+```
+cd /opt/kaldi/tools
+
+wget http://www.openfst.org/twiki/pub/FST/FstDownload/openfst-1.6.7.tar.gz
+tar -zxvf openfst-1.6.7.tar.gz
+cd openfst-1.6.7
+./configure
+make
+make install
+```
+
+다양한 글들이 저 링크에 들어가서 직접 설치하는 등 많은 방법을 제시한다. 위에 코드는 `wget`으로 다운 받고 압축풀고 직접 comfile하는 방식으로 진행된다.
+
+---
+
 이 글대로 하고나서 다시 `sudo sh install_mkl.sh` 하니깐
 output:
 ```
@@ -258,6 +278,14 @@ tools/extras/env.sh를 source해서 너의 path.sh에 IRSTLM을 가능하게 하
 sudo make
 ```
 그러나 저 Warning은 안사라졌다... 넘어가보자...
+
+---
+## 추가   
+
+
+IRSTLM은 
+
+---
 
 # 6. Kaldi src 컴파일
 
@@ -411,14 +439,95 @@ logging:
 ```
 cd /opt/docker-kaldi-gstreamer-server
 
-sh start.sh -y /opt/models/sample_english_nnet2.yaml
+sudo ./start.sh -y /opt/models/sample_english_nnet2.yaml
 ```
 Start!!
 
 ```
 wget https://raw.githubusercontent.com/alumae/kaldi-gstreamer-server/master/kaldigstserver/client.py -P /tmp
-wget https://raw.githubusercontent.com/jcsilva/docker-kaldi-gstreamer-server/master/audio/1272-128104-000.wav -P /tmp
+wget https://raw.githubusercontent.com/jcsilva/docker-kaldi-gstreamer-server/master/audio/1272-128104-0000.wav -P /tmp
 wget https://raw.githubusercontent.com/alumae/kaldi-gstreamer-server/master/test/data/bill_gates-TED.mp3 -P /tmp
-python /tmp/client.py -u ws://localhost:8080/client/ws/speech -r 32000 /tmp/1272-128104-0000.wav
-python /tmp/client.py -u ws://locallhost:8080/client/ws/speech -r 8192 /tmp/bill_gates-TED.mp3
 ```
+다운로드 완료
+
+```
+python /tmp/client.py -u ws://localhost:80/client/ws/speech -r 32000 /tmp/1272-128104-0000.wav
+```
+output:
+```
+Traceback (most recent call last):
+  File "/tmp/client.py", line 4, in <module>
+    from ws4py.client.threadedclient import WebSocketClient
+ImportError: No module named ws4py.client.threadedclient
+```
+ws4py가 없다고 하여 설치해주었다.
+
+```
+pip install ws4py
+```
+
+설치 후 다시 명령어를 실행해보니 이번에는 Connection refused 에러가 났다. ssh로 접속해서 그런지 확인해봐야겠다.
+output:
+```
+Traceback (most recent call last):
+  File "/tmp/client.py", line 127, in <module>
+    main()
+  File "/tmp/client.py", line 122, in main
+    ws.connect()
+  File "/home/han/.local/lib/python2.7/site-packages/ws4py/client/__init__.py", line 217, in connect
+    self.sock.connect(self.bind_addr)
+  File "/usr/lib/python2.7/socket.py", line 228, in meth
+    return getattr(self._sock,name)(*args)
+socket.error: [Errno 111] Connection refused
+```
+
+Connection refused는 IP 주소가 유효하지 않으면 발생하는 에러다. 열심히 삽질해보니 서버가 동작을 안한것이다.
+
+위에서 start.sh 파일을 실행했을때 아무런 로그가 뜨지 않아서 성공한줄 알았지만 사실 아니었다. `/opt`로 가보면 master.log와 worker.log 파일이 생겼을 것이다. 열어보면 에러가 담겨있을 것이다.
+
+output:
+```
+
+```
+tornado가 없다고 한다. 설치해주자
+```
+pip install tornado
+```
+다시 start.sh를 실행해보면 이제서야 제대로 돌아간다. master.log와 worker.log를 확인해보자.
+
+```
+DEBUG 2019-12-09 21:24:06,752 Starting up server 
+    INFO 2019-12-09 21:24:11,315 101 GET /worker/ws/speech (127.0.0.1) 0.36ms 
+    INFO 2019-12-09 21:24:11,315 New worker available <__main__.WorkerSocketHandler object at 0x7f12c4ecce50> 
+    INFO 2019-12-09 21:24:38,998 101 GET /client/ws/speech?content-type= (127.0.0.1) 0.24ms 
+    INFO 2019-12-09 21:24:38,998 02fa1d9b-1df4-4ff1-a6be-056d606e02e5: OPEN 
+    INFO 2019-12-09 21:24:38,998 02fa1d9b-1df4-4ff1-a6be-056d606e02e5: Request arguments: content-type="" 
+    INFO 2019-12-09 21:24:38,998 02fa1d9b-1df4-4ff1-a6be-056d606e02e5: Using worker <__main__.DecoderSocketHandler object at 0x7f12c4ee7850> 
+    INFO 2019-12-09 21:24:39,229 02fa1d9b-1df4-4ff1-a6be-056d606e02e5: Forwarding client message (<type 'str'>) of length 2048 to worker 
+    INFO 2019-12-09 21:24:39,480 02fa1d9b-1df4-4ff1-a6be-056d606e02e5: Forwarding client message (<type 'str'>) of length 2048 to worker 
+    INFO 2019-12-09 21:24:39,731 02fa1d9b-1df4-4ff1-a6be-056d606e02e5: Forwarding client message (<type 'str'>) of length 2048 to worker 
+    INFO 2019-12-09 21:24:39,983 02fa1d9b-1df4-4ff1-a6be-056d606e02e5: Forwarding client message (<type 'str'>) of length 2048 to worker 
+    INFO 2019-12-09 21:24:40,235 02fa1d9b-1df4-4ff1-a6be-056d606e02e5: Forwarding client message (<type 'str'>) of length 2048 to worker 
+```
+돌아가는 듯해 보인다.
+
+다시 
+```
+python /tmp/client.py -u ws://localhost:80/client/ws/speech -r 8192 /tmp/bill_gates-TED.mp3
+```
+를 실행시켜보았지만 되는 듯하다가 만다...
+
+output:
+```
+Audio sent, now sending EOS
+Received error from server (status 1)
+
+```
+
+# 12. 결론
+
+Kaldi에 대해서 아무것도 모르다가 tutorial이라는 글을 보고 무작정 따라하기 시작했다. 따라하면서 설치하다보니 많은 것을 배우게 되었다. 하지만 나는 음성인식 성능과 방법론에 대해 연구하고 싶지 시스템을 구축하는 것에 대해서는 관심이 없다. 이 글은 여기서 마무리하고 다른 tutorial을 보고 시도해봐야겠다. 참고로 kaldi의 간단한 예제는 동작이 되는 것을 확인했다. 다른 글에서 언급할 예정이다.
+
+---
+출처:
+<https://bourbonkk.tistory.com/27>
