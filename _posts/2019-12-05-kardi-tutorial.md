@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Kaldi 설치 및 간단한 예제 실행
+title: Kaldi, Kaldi gstreamer 설치 및 예제 실행
 data: 2019-12-05 17:03:00 +0900
 author: Han Seokhyeon
 category: blog
